@@ -1,0 +1,2 @@
+# AtomicCore [![CurseForge](http://cf.way2muchnoise.eu/full_469093_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/atomiccore) [![CurseForge](http://cf.way2muchnoise.eu/versions/For%20MC_469093_all.svg)](https://www.curseforge.com/minecraft/mc-mods/atomiccore)
+Adds some utilities for my other mods from the ***Atomic series***.

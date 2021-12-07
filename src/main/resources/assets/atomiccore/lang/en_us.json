@@ -1,0 +1,7 @@
+{
+  "tooltip.atomiccore.crafting_component": "Crafting component",
+  "tooltip.atomiccore.crafting": "Crafting: %sx %s",
+
+  "tooltip.atomiccore.hold_shift_for_info": "§f§lHold §o§2SHIFT§r for more information§r",
+  "tooltip.atomiccore.hold_ctrl_for_info": "§f§lHold §o§cCTRL§r for more information§r"
+}
