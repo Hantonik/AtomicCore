@@ -17,7 +17,6 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import java.util.function.Function;
 
 public class BasicBlock extends Block {
-
     public BasicBlock(Material material, Function<Properties, Properties> properties) {
         super(properties.apply(Properties.of(material)));
     }
