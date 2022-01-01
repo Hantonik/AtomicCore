@@ -2,6 +2,7 @@
   "tooltip.atomiccore.crafting_component": "Componente de elaboración",
   "tooltip.atomiccore.crafting": "Receta: %sx %s",
 
-  "tooltip.atomiccore.hold_shift_for_info": "§f§lMantenga presionado §o§2SHIFT§r para obtener más información§r",
-  "tooltip.atomiccore.hold_ctrl_for_info": "§f§lMantenga presionado §o§cCTRL§r para obtener más información§r"
+  "tooltip.atomiccore.hold_shift_for_info": "Mantenga presionado SHIFT para obtener más información",
+  "tooltip.atomiccore.hold_alt_for_info": "Mantenga presionado ALT para obtener más información",
+  "tooltip.atomiccore.hold_ctrl_for_info": "Mantenga presionado CTRL para obtener más información"
 }

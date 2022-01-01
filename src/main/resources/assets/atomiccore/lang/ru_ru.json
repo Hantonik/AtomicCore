@@ -2,6 +2,7 @@
   "tooltip.atomiccore.crafting_component": "Компонент крафта",
   "tooltip.atomiccore.crafting": "Ремесло: %sx %s",
 
-  "tooltip.atomiccore.hold_shift_for_info": "§f§lУдерживайте §o§2SHIFT§r для получения дополнительной информации§r",
-  "tooltip.atomiccore.hold_ctrl_for_info": "§f§lУдерживайте §o§cCTRL§r для получения дополнительной информации§r"
+  "tooltip.atomiccore.hold_shift_for_info": "Удерживайте SHIFT для получения дополнительной информации",
+  "tooltip.atomiccore.hold_alt_for_info": "Удерживайте ALT для получения дополнительной информации",
+  "tooltip.atomiccore.hold_ctrl_for_info": "Удерживайте CTRL для получения дополнительной информации"
 }

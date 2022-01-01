@@ -2,6 +2,7 @@
   "tooltip.atomiccore.crafting_component": "Composant d'artisanat",
   "tooltip.atomiccore.crafting": "Artisanat: %sx %s",
 
-  "tooltip.atomiccore.hold_shift_for_info": "§f§lMaintenez §o§2SHIFT§r pour plus d'informations§r",
-  "tooltip.atomiccore.hold_ctrl_for_info": "§f§lMaintenez §o§cCTRL§r pour plus d'informations§r"
+  "tooltip.atomiccore.hold_shift_for_info": "Maintenez SHIFT pour plus d'informations",
+  "tooltip.atomiccore.hold_alt_for_info": "Maintenez ALT pour plus d'informations",
+  "tooltip.atomiccore.hold_ctrl_for_info": "Maintenez CTRL pour plus d'informations"
 }

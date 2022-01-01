@@ -2,6 +2,7 @@
   "tooltip.atomiccore.crafting_component": "Handwerkskomponente",
   "tooltip.atomiccore.crafting": "Basteln: %sx %s",
 
-  "tooltip.atomiccore.hold_shift_for_info": "§f§lHalten Sie §o§2SHIFT§r gedrückt, um weitere Informationen zu erhalten§r",
-  "tooltip.atomiccore.hold_ctrl_for_info": "§f§lHalten Sie §o§cCTRL§r gedrückt, um weitere Informationen zu erhalten§r"
+  "tooltip.atomiccore.hold_shift_for_info": "Halten Sie SHIFT gedrückt, um weitere Informationen zu erhalten",
+  "tooltip.atomiccore.hold_alt_for_info": "Halten Sie ALT gedrückt, um weitere Informationen zu erhalten",
+  "tooltip.atomiccore.hold_ctrl_for_info": "Halten Sie CTRL gedrückt, um weitere Informationen zu erhalten"
 }

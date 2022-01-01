@@ -2,6 +2,7 @@
   "tooltip.atomiccore.crafting_component": "Składnik do receptur",
   "tooltip.atomiccore.crafting": "Receptura: %sx %s",
 
-  "tooltip.atomiccore.hold_shift_for_info": "§f§lPrzytrzymaj §o§2SHIFT§r po więcej informacji§r",
-  "tooltip.atomiccore.hold_ctrl_for_info": "§f§lPrzytrzymaj §o§cCTRL§r po więcej informacji§r"
+  "tooltip.atomiccore.hold_shift_for_info": "Przytrzymaj SHIFT po więcej informacji",
+  "tooltip.atomiccore.hold_alt_for_info": "Przytrzymaj ALT po więcej informacji",
+  "tooltip.atomiccore.hold_ctrl_for_info": "Przytrzymaj CTRL po więcej informacji"
 }

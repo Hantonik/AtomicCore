@@ -2,6 +2,7 @@
   "tooltip.atomiccore.crafting_component": "제작 구성 요소",
   "tooltip.atomiccore.crafting": "제작: %sx %s",
 
-  "tooltip.atomiccore.hold_shift_for_info": "§f§l자세한 내용을 보려면 §o§2SHIFT§r 를 길게 누르세요§r",
-  "tooltip.atomiccore.hold_ctrl_for_info": "§f§l자세한 내용을 보려면 §o§cCTRL§r 를 길게 누르세요§r"
+  "tooltip.atomiccore.hold_shift_for_info": "자세한 내용을 보려면 SHIFT 를 길게 누르세요",
+  "tooltip.atomiccore.hold_alt_for_info": "자세한 내용을 보려면 ALT 를 길게 누르세요",
+  "tooltip.atomiccore.hold_ctrl_for_info": "자세한 내용을 보려면 CTRL 를 길게 누르세요"
 }

@@ -37,6 +37,10 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+
+            ideaModule "${rootProject.name}.${project.name}.main"
 
             mods {
                 atomiccore {
@@ -50,6 +54,10 @@ minecraft {
 
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+
+            ideaModule "${rootProject.name}.${project.name}.main"
 
             mods {
                 atomiccore {
@@ -63,7 +71,7 @@ minecraft {
 dependencies {
     minecraft "net.minecraftforge:forge:${config.mc_version}-${config.forge_version}"
 
-    implementation 'com.google.errorprone:error_prone_annotation:2.9.0'
+    implementation 'com.google.errorprone:error_prone_annotation:2.10.0'
 }
 
 task replaceResources(type: Copy) {
@@ -132,4 +140,8 @@ publishing {
             }
         }
     }
+}
+
+repositories {
+    mavenCentral()
 }
