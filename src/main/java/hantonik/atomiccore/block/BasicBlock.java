@@ -17,38 +17,22 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import java.util.function.Function;
 
 public class BasicBlock extends Block {
-    private final ToolAction toolAction;
 
-    public BasicBlock(Material material, Function<Properties, Properties> properties, ToolAction toolAction) {
+    public BasicBlock(Material material, Function<Properties, Properties> properties) {
         super(properties.apply(Properties.of(material)));
-
-        this.toolAction = toolAction;
     }
 
-    public BasicBlock(Material material, SoundType soundType, ToolAction toolAction, float hardness, float resistance) {
+    public BasicBlock(Material material, SoundType soundType, float hardness, float resistance) {
         super(Properties.of(material)
                 .sound(soundType)
-                .strength(hardness, resistance)
-                .requiresCorrectToolForDrops());
-
-        this.toolAction = toolAction;
+                .strength(hardness, resistance));
     }
 
-    public Tag.Named<Block> getRequiredTool() {
-        if (this.toolAction.equals(ToolActions.PICKAXE_DIG))
-            return BlockTags.MINEABLE_WITH_PICKAXE;
-
-        else if (this.toolAction.equals(ToolActions.AXE_DIG))
-            return BlockTags.MINEABLE_WITH_AXE;
-
-        else if (this.toolAction.equals(ToolActions.SHOVEL_DIG))
-            return BlockTags.MINEABLE_WITH_SHOVEL;
-
-        else if (this.toolAction.equals(ToolActions.HOE_DIG))
-            return BlockTags.MINEABLE_WITH_HOE;
-
-        else
-            return null;
+    public BasicBlock(Material material, SoundType sound, float hardness, float resistance, boolean tool) {
+        super(Properties.of(material)
+                .sound(sound)
+                .strength(hardness, resistance)
+                .requiresCorrectToolForDrops());
     }
 
     public static boolean isEnergy(Direction facing, WorldGenLevel world, BlockPos facingPos) {
