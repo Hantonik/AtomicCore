@@ -2,7 +2,8 @@
   "tooltip.atomiccore.crafting_component": "Componente de elaboración",
   "tooltip.atomiccore.crafting": "Receta: %sx %s",
 
-  "tooltip.atomiccore.hold_shift_for_info": "Mantenga presionado SHIFT para obtener más información",
-  "tooltip.atomiccore.hold_alt_for_info": "Mantenga presionado ALT para obtener más información",
-  "tooltip.atomiccore.hold_ctrl_for_info": "Mantenga presionado CTRL para obtener más información"
+  "attributes.atomiccore.hold_for_info": "Mantenga presionado %s para obtener más información",
+
+  "attributes.atomiccore.melting_temperature": "Temperatura de fusión",
+  "attributes.atomiccore.burning_temperature": "Temperatura de combustión"
 }

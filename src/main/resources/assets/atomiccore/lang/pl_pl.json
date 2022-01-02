@@ -2,7 +2,8 @@
   "tooltip.atomiccore.crafting_component": "Składnik do receptur",
   "tooltip.atomiccore.crafting": "Receptura: %sx %s",
 
-  "tooltip.atomiccore.hold_shift_for_info": "Przytrzymaj SHIFT po więcej informacji",
-  "tooltip.atomiccore.hold_alt_for_info": "Przytrzymaj ALT po więcej informacji",
-  "tooltip.atomiccore.hold_ctrl_for_info": "Przytrzymaj CTRL po więcej informacji"
+  "attributes.atomiccore.hold_for_info": "Przytrzymaj %s po więcej informacji",
+
+  "attributes.atomiccore.melting_temperature": "Temperatura topnienia",
+  "attributes.atomiccore.burning_temperature": "Temperatura spalania"
 }
