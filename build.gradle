@@ -72,6 +72,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${config.mc_version}-${config.forge_version}"
 
     implementation 'com.google.errorprone:error_prone_annotation:2.10.0'
+    implementation 'org.projectlombok:lombok:1.18.22'
 }
 
 task replaceResources(type: Copy) {
