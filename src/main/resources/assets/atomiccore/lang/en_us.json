@@ -5,5 +5,6 @@
   "attributes.atomiccore.hold_for_info": "Hold %s for more information",
 
   "attributes.atomiccore.melting_temperature": "Melting temperature",
-  "attributes.atomiccore.burning_temperature": "Burning temperature"
+  "attributes.atomiccore.burning_temperature": "Burning temperature",
+  "attributes.atomiccore.burn_time": "Burn time"
 }

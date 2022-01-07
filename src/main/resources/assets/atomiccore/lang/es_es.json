@@ -5,5 +5,6 @@
   "attributes.atomiccore.hold_for_info": "Mantenga presionado %s para obtener más información",
 
   "attributes.atomiccore.melting_temperature": "Temperatura de fusión",
-  "attributes.atomiccore.burning_temperature": "Temperatura de combustión"
+  "attributes.atomiccore.burning_temperature": "Temperatura de combustión",
+  "attributes.atomiccore.burn_time": "Tiempo de grabación"
 }

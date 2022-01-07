@@ -13,6 +13,7 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import org.jetbrains.annotations.Nullable;
@@ -23,18 +24,18 @@ import java.util.function.Function;
 public class AttributedItem extends Item implements IAttributed {
     @Nullable
     private final FluidObject<? extends Fluid> melted;
-
-    private final int meltingTemperature;
+    private final int burningTime;
     private final int burningTemperature;
-
+    private final int meltingTemperature;
     private final boolean burnable;
     private final boolean fusible;
 
     public AttributedItem(Properties properties, Attributes attributes) {
         super(properties);
 
-        this.meltingTemperature = attributes.meltingTemperature;
+        this.burningTime = attributes.burningTime;
         this.burningTemperature = attributes.burningTemperature;
+        this.meltingTemperature = attributes.meltingTemperature;
         this.burnable = attributes.burnable;
         this.fusible = attributes.fusible;
         this.melted = attributes.melted;
@@ -58,6 +59,11 @@ public class AttributedItem extends Item implements IAttributed {
     }
 
     @Override
+    public int getBurningTime() {
+        return this.burningTime;
+    }
+
+    @Override
     public int getMeltingTemperature() {
         return this.meltingTemperature;
     }
@@ -77,6 +83,11 @@ public class AttributedItem extends Item implements IAttributed {
         return this.fusible;
     }
 
+    @Override
+    public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
+        return this.isBurnable() ? this.getBurningTime() : super.getBurnTime(itemStack, recipeType);
+    }
+
     @Nullable
     @Override
     public CompoundTag getShareTag(ItemStack stack) {
@@ -94,6 +105,13 @@ public class AttributedItem extends Item implements IAttributed {
         else {
             tag.remove("BurningTemperature");
             tag.putInt("BurningTemperature", this.burningTemperature);
+        }
+
+        if (!tag.contains("BurningTime"))
+            tag.putInt("BurningTime", this.burningTime);
+        else {
+            tag.remove("BurningTime");
+            tag.putInt("BurningTime", this.burningTime);
         }
 
         if (!tag.contains("Burnable"))
@@ -122,17 +140,22 @@ public class AttributedItem extends Item implements IAttributed {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
+        super.appendHoverText(stack, level, components, flag);
+
         Component holdComponent = Localizable.of("attributes." + AtomicCore.MOD_ID + ".hold_for_info").args(new TextComponent("SHIFT").withStyle(ChatFormatting.GREEN)).build().withStyle(ChatFormatting.GRAY);
 
         Component meltingTemperatureComponent = new TextComponent(Localizable.of("attributes." + AtomicCore.MOD_ID + ".melting_temperature").buildString() + ": ").withStyle(ChatFormatting.GRAY).append(new TextComponent(this.meltingTemperature + "K").withStyle(ChatFormatting.BLUE));
         Component burningTemperatureComponent = new TextComponent(Localizable.of("attributes." + AtomicCore.MOD_ID + ".burning_temperature").buildString() + ": ").withStyle(ChatFormatting.GRAY).append(new TextComponent(this.burningTemperature + "K").withStyle(ChatFormatting.RED));
+        Component burningTimeComponent = new TextComponent(Localizable.of("attributes." + AtomicCore.MOD_ID + ".burn_time").buildString() + ": ").withStyle(ChatFormatting.GRAY).append(new TextComponent(this.burningTime + " ticks").withStyle(ChatFormatting.BLACK));
 
         if (!Screen.hasShiftDown()) {
             if (this.fusible)
                 components.remove(meltingTemperatureComponent);
 
-            if (this.burnable)
+            if (this.burnable) {
                 components.remove(burningTemperatureComponent);
+                components.remove(burningTimeComponent);
+            }
 
             components.add(holdComponent);
         } else {
@@ -141,17 +164,18 @@ public class AttributedItem extends Item implements IAttributed {
             if (this.fusible)
                 components.add(meltingTemperatureComponent);
 
-            if (this.burnable)
+            if (this.burnable) {
                 components.add(burningTemperatureComponent);
+                components.add(burningTimeComponent);
+            }
         }
-
-        super.appendHoverText(stack, level, components, flag);
     }
 
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Attributes {
-        int meltingTemperature = 1000;
+        int burningTime = -1;
         int burningTemperature = 1000;
+        int meltingTemperature = 1000;
         boolean fusible = false;
         boolean burnable = false;
         @Nullable
@@ -164,8 +188,9 @@ public class AttributedItem extends Item implements IAttributed {
         public static Attributes copy(IAttributed attributed) {
             Attributes attributes = Attributes.create();
 
-            attributes.meltingTemperature = attributed.getMeltingTemperature();
+            attributes.burningTime = attributed.getBurningTime();
             attributes.burningTemperature = attributed.getBurningTemperature();
+            attributes.meltingTemperature = attributed.getMeltingTemperature();
             attributes.fusible = attributed.isFusible();
             attributes.burnable = attributed.isBurnable();
             attributes.melted = attributed.getMelted();
@@ -173,14 +198,20 @@ public class AttributedItem extends Item implements IAttributed {
             return attributes;
         }
 
-        public Attributes meltingTemperature(int temperature) {
-            this.meltingTemperature = temperature;
+        public Attributes burningTime(int burningTime) {
+            this.burningTime = burningTime;
 
             return this;
         }
 
         public Attributes burningTemperature(int temperature) {
             this.burningTemperature = temperature;
+
+            return this;
+        }
+
+        public Attributes meltingTemperature(int temperature) {
+            this.meltingTemperature = temperature;
 
             return this;
         }
