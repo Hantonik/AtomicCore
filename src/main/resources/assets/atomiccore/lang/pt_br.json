@@ -5,5 +5,6 @@
   "attributes.atomiccore.hold_for_info": "Segure %s para mais informações",
 
   "attributes.atomiccore.melting_temperature": "Temperatura de fusão",
-  "attributes.atomiccore.burning_temperature": "Temperatura de queima"
+  "attributes.atomiccore.burning_temperature": "Temperatura de queima",
+  "attributes.atomiccore.burn_time": "Tempo de queima"
 }

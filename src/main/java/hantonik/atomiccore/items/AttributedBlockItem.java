@@ -11,6 +11,7 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
@@ -22,14 +23,16 @@ import java.util.function.Function;
 public class AttributedBlockItem extends BlockItem implements IAttributed {
     @Nullable
     private final FluidObject<? extends Fluid> melted;
-    private final int meltingTemperature;
+    private final int burningTime;
     private final int burningTemperature;
+    private final int meltingTemperature;
     private final boolean burnable;
     private final boolean fusible;
 
     public AttributedBlockItem(Block block, Properties properties, AttributedItem.Attributes attributes) {
         super(block, properties);
 
+        this.burningTime = attributes.burningTime;
         this.meltingTemperature = attributes.meltingTemperature;
         this.burningTemperature = attributes.burningTemperature;
         this.burnable = attributes.burnable;
@@ -55,6 +58,11 @@ public class AttributedBlockItem extends BlockItem implements IAttributed {
     }
 
     @Override
+    public int getBurningTime() {
+        return this.burningTime;
+    }
+
+    @Override
     public int getMeltingTemperature() {
         return this.meltingTemperature;
     }
@@ -74,6 +82,11 @@ public class AttributedBlockItem extends BlockItem implements IAttributed {
         return this.fusible;
     }
 
+    @Override
+    public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
+        return this.isBurnable() ? this.getBurningTime() : super.getBurnTime(itemStack, recipeType);
+    }
+
     @Nullable
     @Override
     public CompoundTag getShareTag(ItemStack stack) {
@@ -91,6 +104,13 @@ public class AttributedBlockItem extends BlockItem implements IAttributed {
         else {
             tag.remove("BurningTemperature");
             tag.putInt("BurningTemperature", this.burningTemperature);
+        }
+
+        if (!tag.contains("BurningTime"))
+            tag.putInt("BurningTime", this.burningTime);
+        else {
+            tag.remove("BurningTime");
+            tag.putInt("BurningTime", this.burningTime);
         }
 
         if (!tag.contains("Burnable"))
@@ -119,17 +139,22 @@ public class AttributedBlockItem extends BlockItem implements IAttributed {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
+        super.appendHoverText(stack, level, components, flag);
+
         Component holdComponent = Localizable.of("attributes." + AtomicCore.MOD_ID + ".hold_for_info").args(new TextComponent("SHIFT").withStyle(ChatFormatting.GREEN)).build().withStyle(ChatFormatting.GRAY);
 
         Component meltingTemperatureComponent = new TextComponent(Localizable.of("attributes." + AtomicCore.MOD_ID + ".melting_temperature").buildString() + ": ").withStyle(ChatFormatting.GRAY).append(new TextComponent(this.meltingTemperature + "K").withStyle(ChatFormatting.BLUE));
         Component burningTemperatureComponent = new TextComponent(Localizable.of("attributes." + AtomicCore.MOD_ID + ".burning_temperature").buildString() + ": ").withStyle(ChatFormatting.GRAY).append(new TextComponent(this.burningTemperature + "K").withStyle(ChatFormatting.RED));
+        Component burningTimeComponent = new TextComponent(Localizable.of("attributes." + AtomicCore.MOD_ID + ".burn_time").buildString() + ": ").withStyle(ChatFormatting.GRAY).append(new TextComponent(this.burningTime + " ticks").withStyle(ChatFormatting.BLACK));
 
         if (!Screen.hasShiftDown()) {
             if (this.fusible)
                 components.remove(meltingTemperatureComponent);
 
-            if (this.burnable)
+            if (this.burnable) {
                 components.remove(burningTemperatureComponent);
+                components.remove(burningTimeComponent);
+            }
 
             components.add(holdComponent);
         } else {
@@ -138,10 +163,10 @@ public class AttributedBlockItem extends BlockItem implements IAttributed {
             if (this.fusible)
                 components.add(meltingTemperatureComponent);
 
-            if (this.burnable)
+            if (this.burnable) {
                 components.add(burningTemperatureComponent);
+                components.add(burningTimeComponent);
+            }
         }
-
-        super.appendHoverText(stack, level, components, flag);
     }
 }

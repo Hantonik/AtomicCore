@@ -5,5 +5,6 @@
   "attributes.atomiccore.hold_for_info": "Halten Sie die %s gedrückt, um weitere Informationen zu erhalten",
 
   "attributes.atomiccore.melting_temperature": "Schmelztemperatur",
-  "attributes.atomiccore.burning_temperature": "Brenntemperatur"
+  "attributes.atomiccore.burning_temperature": "Brenntemperatur",
+  "attributes.atomiccore.burn_time": "Brenndauer"
 }
