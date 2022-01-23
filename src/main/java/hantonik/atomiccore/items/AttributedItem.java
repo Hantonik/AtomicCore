@@ -25,6 +25,7 @@ public class AttributedItem extends Item implements IAttributed {
     @Nullable
     private final FluidObject<? extends Fluid> melted;
     private final int burningTime;
+    private final int meltingTime;
     private final int burningTemperature;
     private final int meltingTemperature;
     private final boolean burnable;
@@ -34,6 +35,7 @@ public class AttributedItem extends Item implements IAttributed {
         super(properties);
 
         this.burningTime = attributes.burningTime;
+        this.meltingTime = attributes.meltingTime;
         this.burningTemperature = attributes.burningTemperature;
         this.meltingTemperature = attributes.meltingTemperature;
         this.burnable = attributes.burnable;
@@ -61,6 +63,11 @@ public class AttributedItem extends Item implements IAttributed {
     @Override
     public int getBurningTime() {
         return this.burningTime;
+    }
+
+    @Override
+    public int getMeltingTime() {
+        return this.meltingTime;
     }
 
     @Override
@@ -107,6 +114,13 @@ public class AttributedItem extends Item implements IAttributed {
             tag.putInt("BurningTemperature", this.burningTemperature);
         }
 
+        if (!tag.contains("MeltingTime"))
+            tag.putInt("MeltingTime", this.meltingTime);
+        else {
+            tag.remove("MeltingTime");
+            tag.putInt("MeltingTime", this.meltingTime);
+        }
+
         if (!tag.contains("BurningTime"))
             tag.putInt("BurningTime", this.burningTime);
         else {
@@ -146,11 +160,14 @@ public class AttributedItem extends Item implements IAttributed {
 
         Component meltingTemperatureComponent = new TextComponent(Localizable.of("attributes." + AtomicCore.MOD_ID + ".melting_temperature").buildString() + ": ").withStyle(ChatFormatting.GRAY).append(new TextComponent(this.meltingTemperature + "K").withStyle(ChatFormatting.BLUE));
         Component burningTemperatureComponent = new TextComponent(Localizable.of("attributes." + AtomicCore.MOD_ID + ".burning_temperature").buildString() + ": ").withStyle(ChatFormatting.GRAY).append(new TextComponent(this.burningTemperature + "K").withStyle(ChatFormatting.RED));
-        Component burningTimeComponent = new TextComponent(Localizable.of("attributes." + AtomicCore.MOD_ID + ".burn_time").buildString() + ": ").withStyle(ChatFormatting.GRAY).append(new TextComponent(this.burningTime + " ticks").withStyle(ChatFormatting.BLACK));
+        Component meltingTimeComponent = new TextComponent(Localizable.of("attributes." + AtomicCore.MOD_ID + ".melting_time").buildString() + ": ").withStyle(ChatFormatting.GRAY).append(new TextComponent(this.meltingTime + " ticks").withStyle(ChatFormatting.DARK_BLUE));
+        Component burningTimeComponent = new TextComponent(Localizable.of("attributes." + AtomicCore.MOD_ID + ".burn_time").buildString() + ": ").withStyle(ChatFormatting.GRAY).append(new TextComponent(this.burningTime + " ticks").withStyle(ChatFormatting.DARK_RED));
 
         if (!Screen.hasShiftDown()) {
-            if (this.fusible)
+            if (this.fusible) {
                 components.remove(meltingTemperatureComponent);
+                components.remove(meltingTimeComponent);
+            }
 
             if (this.burnable) {
                 components.remove(burningTemperatureComponent);
@@ -161,8 +178,10 @@ public class AttributedItem extends Item implements IAttributed {
         } else {
             components.remove(holdComponent);
 
-            if (this.fusible)
+            if (this.fusible) {
                 components.add(meltingTemperatureComponent);
+                components.add(meltingTimeComponent);
+            }
 
             if (this.burnable) {
                 components.add(burningTemperatureComponent);
@@ -174,6 +193,7 @@ public class AttributedItem extends Item implements IAttributed {
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Attributes {
         int burningTime = -1;
+        int meltingTime = -1;
         int burningTemperature = 1000;
         int meltingTemperature = 1000;
         boolean fusible = false;
@@ -189,6 +209,7 @@ public class AttributedItem extends Item implements IAttributed {
             Attributes attributes = Attributes.create();
 
             attributes.burningTime = attributed.getBurningTime();
+            attributes.meltingTime = attributed.getMeltingTime();
             attributes.burningTemperature = attributed.getBurningTemperature();
             attributes.meltingTemperature = attributed.getMeltingTemperature();
             attributes.fusible = attributed.isFusible();
@@ -200,6 +221,12 @@ public class AttributedItem extends Item implements IAttributed {
 
         public Attributes burningTime(int burningTime) {
             this.burningTime = burningTime;
+
+            return this;
+        }
+
+        public Attributes meltingTime(int meltingTime) {
+            this.meltingTime = meltingTime;
 
             return this;
         }
