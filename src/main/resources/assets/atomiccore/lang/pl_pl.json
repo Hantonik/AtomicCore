@@ -6,5 +6,6 @@
 
   "attributes.atomiccore.melting_temperature": "Temperatura topnienia",
   "attributes.atomiccore.burning_temperature": "Temperatura spalania",
+  "attributes.atomiccore.melting_time": "Czas topienia",
   "attributes.atomiccore.burn_time": "Czas spalania"
 }

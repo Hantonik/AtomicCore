@@ -24,6 +24,7 @@ public class AttributedBlockItem extends BlockItem implements IAttributed {
     @Nullable
     private final FluidObject<? extends Fluid> melted;
     private final int burningTime;
+    private final int meltingTime;
     private final int burningTemperature;
     private final int meltingTemperature;
     private final boolean burnable;
@@ -33,6 +34,7 @@ public class AttributedBlockItem extends BlockItem implements IAttributed {
         super(block, properties);
 
         this.burningTime = attributes.burningTime;
+        this.meltingTime = attributes.meltingTime;
         this.meltingTemperature = attributes.meltingTemperature;
         this.burningTemperature = attributes.burningTemperature;
         this.burnable = attributes.burnable;
@@ -60,6 +62,11 @@ public class AttributedBlockItem extends BlockItem implements IAttributed {
     @Override
     public int getBurningTime() {
         return this.burningTime;
+    }
+
+    @Override
+    public int getMeltingTime() {
+        return this.meltingTime;
     }
 
     @Override
@@ -113,6 +120,13 @@ public class AttributedBlockItem extends BlockItem implements IAttributed {
             tag.putInt("BurningTime", this.burningTime);
         }
 
+        if (!tag.contains("MeltingTime"))
+            tag.putInt("MeltingTime", this.meltingTime);
+        else {
+            tag.remove("MeltingTime");
+            tag.putInt("MeltingTime", this.meltingTime);
+        }
+
         if (!tag.contains("Burnable"))
             tag.putBoolean("Burnable", this.burnable);
         else {
@@ -145,11 +159,14 @@ public class AttributedBlockItem extends BlockItem implements IAttributed {
 
         Component meltingTemperatureComponent = new TextComponent(Localizable.of("attributes." + AtomicCore.MOD_ID + ".melting_temperature").buildString() + ": ").withStyle(ChatFormatting.GRAY).append(new TextComponent(this.meltingTemperature + "K").withStyle(ChatFormatting.BLUE));
         Component burningTemperatureComponent = new TextComponent(Localizable.of("attributes." + AtomicCore.MOD_ID + ".burning_temperature").buildString() + ": ").withStyle(ChatFormatting.GRAY).append(new TextComponent(this.burningTemperature + "K").withStyle(ChatFormatting.RED));
-        Component burningTimeComponent = new TextComponent(Localizable.of("attributes." + AtomicCore.MOD_ID + ".burn_time").buildString() + ": ").withStyle(ChatFormatting.GRAY).append(new TextComponent(this.burningTime + " ticks").withStyle(ChatFormatting.BLACK));
+        Component meltingTimeComponent = new TextComponent(Localizable.of("attributes." + AtomicCore.MOD_ID + ".melting_time").buildString() + ": ").withStyle(ChatFormatting.GRAY).append(new TextComponent(this.meltingTime + " ticks").withStyle(ChatFormatting.DARK_BLUE));
+        Component burningTimeComponent = new TextComponent(Localizable.of("attributes." + AtomicCore.MOD_ID + ".burn_time").buildString() + ": ").withStyle(ChatFormatting.GRAY).append(new TextComponent(this.burningTime + " ticks").withStyle(ChatFormatting.DARK_RED));
 
         if (!Screen.hasShiftDown()) {
-            if (this.fusible)
+            if (this.fusible) {
                 components.remove(meltingTemperatureComponent);
+                components.remove(meltingTimeComponent);
+            }
 
             if (this.burnable) {
                 components.remove(burningTemperatureComponent);
@@ -160,8 +177,10 @@ public class AttributedBlockItem extends BlockItem implements IAttributed {
         } else {
             components.remove(holdComponent);
 
-            if (this.fusible)
+            if (this.fusible) {
                 components.add(meltingTemperatureComponent);
+                components.add(meltingTimeComponent);
+            }
 
             if (this.burnable) {
                 components.add(burningTemperatureComponent);

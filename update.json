@@ -2,7 +2,7 @@
   "homepage": "https://www.curseforge.com/minecraft/mc-mods/atomiccore",
 
   "promos": {
-    "1.18.1-latest": "3.2.2",
+    "1.18.1-latest": "3.2.4",
     "1.18.1-recommended": "3.2.2",
 
     "1.18-latest": "3.0.0",
@@ -10,6 +10,8 @@
   },
 
   "1.18.1": {
+    "3.2.4": "Added Melting time stat to AttributedItem",
+    "3.2.3": "Fixed Burn time info color in AttributedItem",
     "3.2.2": "Fixed AttributedItem",
     "3.2.1": "Fixed ModelLoader not loading",
     "3.2.0": "Added fluid registry",

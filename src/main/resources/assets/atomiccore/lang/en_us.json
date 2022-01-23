@@ -6,5 +6,6 @@
 
   "attributes.atomiccore.melting_temperature": "Melting temperature",
   "attributes.atomiccore.burning_temperature": "Burning temperature",
+  "attributes.atomiccore.melting_time": "Melting time",
   "attributes.atomiccore.burn_time": "Burn time"
 }
