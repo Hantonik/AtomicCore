@@ -6,5 +6,6 @@
 
   "attributes.atomiccore.melting_temperature": "녹는 온도",
   "attributes.atomiccore.burning_temperature": "타는 온도",
+  "attributes.atomiccore.melting_time": "녹는 시간",
   "attributes.atomiccore.burn_time": "굽는 시간"
 }
