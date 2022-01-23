@@ -26,7 +26,7 @@ public abstract class BasicTileEntity extends BlockEntity {
 
     @Override
     public final CompoundTag getUpdateTag() {
-        return this.save(new CompoundTag());
+        return this.saveWithoutMetadata();
     }
 
     public void markDirtyAndDispatch() {
