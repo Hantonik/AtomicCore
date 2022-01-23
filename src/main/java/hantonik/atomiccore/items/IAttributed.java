@@ -6,6 +6,7 @@ import net.minecraft.world.level.material.Fluid;
 public interface IAttributed {
     FluidObject<? extends Fluid> getMelted();
     int getBurningTime();
+    int getMeltingTime();
     int getBurningTemperature();
     int getMeltingTemperature();
     boolean isBurnable();
