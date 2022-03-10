@@ -1,0 +1,11 @@
+{
+  "tooltip.atomiccore.crafting_component": "Componente de artesanato",
+  "tooltip.atomiccore.crafting": "Receita: %sx %s",
+
+  "attributes.atomiccore.hold_for_info": "Segure %s para mais informações",
+
+  "attributes.atomiccore.melting_temperature": "Temperatura de fusão",
+  "attributes.atomiccore.burning_temperature": "Temperatura de queima",
+  "attributes.atomiccore.melting_time": "Tempo de derretimento",
+  "attributes.atomiccore.burn_time": "Tempo de queima"
+}

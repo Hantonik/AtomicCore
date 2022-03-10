@@ -1,0 +1,11 @@
+{
+  "tooltip.atomiccore.crafting_component": "Składnik do receptur",
+  "tooltip.atomiccore.crafting": "Receptura: %sx %s",
+
+  "attributes.atomiccore.hold_for_info": "Przytrzymaj %s po więcej informacji",
+
+  "attributes.atomiccore.melting_temperature": "Temperatura topnienia",
+  "attributes.atomiccore.burning_temperature": "Temperatura spalania",
+  "attributes.atomiccore.melting_time": "Czas topienia",
+  "attributes.atomiccore.burn_time": "Czas spalania"
+}

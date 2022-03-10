@@ -1,0 +1,11 @@
+{
+  "tooltip.atomiccore.crafting_component": "Компонент крафта",
+  "tooltip.atomiccore.crafting": "Ремесло: %sx %s",
+
+  "attributes.atomiccore.hold_for_info": "Удерживайте %s для получения дополнительной информации",
+
+  "attributes.atomiccore.melting_temperature": "Температура плавления",
+  "attributes.atomiccore.burning_temperature": "Температура горения",
+  "attributes.atomiccore.melting_time": "время плавления",
+  "attributes.atomiccore.burn_time": "Время записи"
+}

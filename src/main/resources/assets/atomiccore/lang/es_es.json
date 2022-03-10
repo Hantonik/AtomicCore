@@ -1,0 +1,11 @@
+{
+  "tooltip.atomiccore.crafting_component": "Componente de elaboración",
+  "tooltip.atomiccore.crafting": "Receta: %sx %s",
+
+  "attributes.atomiccore.hold_for_info": "Mantenga presionado %s para obtener más información",
+
+  "attributes.atomiccore.melting_temperature": "Temperatura de fusión",
+  "attributes.atomiccore.burning_temperature": "Temperatura de combustión",
+  "attributes.atomiccore.melting_time": "Tiempo de fusión",
+  "attributes.atomiccore.burn_time": "Tiempo de grabación"
+}

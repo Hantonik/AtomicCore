@@ -1,0 +1,11 @@
+{
+  "tooltip.atomiccore.crafting_component": "제작 구성 요소",
+  "tooltip.atomiccore.crafting": "제작: %sx %s",
+
+  "attributes.atomiccore.hold_for_info": "자세한 내용을 보려면 %s 를 길게 누르세요",
+
+  "attributes.atomiccore.melting_temperature": "녹는 온도",
+  "attributes.atomiccore.burning_temperature": "타는 온도",
+  "attributes.atomiccore.melting_time": "녹는 시간",
+  "attributes.atomiccore.burn_time": "굽는 시간"
+}
