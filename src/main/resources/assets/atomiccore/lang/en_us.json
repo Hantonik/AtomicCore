@@ -1,0 +1,31 @@
+{
+  "tooltip.atomiccore.crafting_component": "Crafting component",
+  "tooltip.atomiccore.crafting": "Crafting: %sx %s",
+
+  "attributes.atomiccore.hold_for_info": "Hold %s for more information",
+
+  "attributes.atomiccore.melting_temperature": "Melting temperature",
+  "attributes.atomiccore.burning_temperature": "Burning temperature",
+  "attributes.atomiccore.melting_time": "Melting time",
+  "attributes.atomiccore.burn_time": "Burn time",
+
+  "book.atomiccore.name": "Atomic tome",
+  "book.atomiccore.subtitle": "The Atomic Series.",
+
+  "book.atomiccore.landing_text": "Guide book for mods from $(l)$(#7118BC)$(l:curiosities/the_atomic_series)The Atomic Series$(). $(br2)This guide book will extend as you add more mods from $(l)$(#7118BC)$(l:curiosities/the_atomic_series)The Atomic Series$(). The categories for each mod will appear on the right.",
+
+  "book.atomiccore.category.curiosities.name": "Curiosities",
+  "book.atomiccore.category.curiosities.description": "Here you will find interesting facts about $(l)$(#7118BC)$(l:curiosities/the_atomic_series)The Atomic Series$() project and its creators.",
+
+  "book.atomiccore.entry.the_atomic_series": "The Atomic Series",
+
+  "book.atomiccore.entry.the_atomic_series.page.1": "$(l)$(#7118BC)The Atomic Series$() is a project created by $(l)$(l:curiosities/creators)Hantonik$(). $(br2)All the mods in this series are connected with each other, but you don't have to add them all to make everything work.",
+  "book.atomiccore.entry.the_atomic_series.page.2": "To run any mod from this series, the $(l)$(#00A5FF)Atomic Core$() library is required. It contains the necessary elements for the functioning of each mod from $(l)$(#7118BC)The Atomic Series$().",
+  "book.atomiccore.entry.the_atomic_series.page.3": "If you want to have a full game experience with mods from this series, you can install the $(l)$(#FF0072)Atomic Technology$() mod. This mod adds all mods from $(l)$(#7118BC)The Atomic Series$() to the game as one. Thanks to this, you do not have to worry if you are missing any of the modifications.",
+  "book.atomiccore.entry.the_atomic_series.page.4": "$(l)$(#75EA00)Atomic Components$() is a modification that adds materials needed to build machines to the game. It contains metals of various kinds in various components for machines and their alloys with different properties. $(l)No machines can be made without this modification!$()",
+  "book.atomiccore.entry.the_atomic_series.page.5": "$(l)$(#FF8800)Atomic Machines$() is a mod that adds interesting machines that can be useful in the game. $(br)$(l)Energy is essential$(), without it no machine will work, here you will find a way to produce it and use it to create amazing things such as $(l)cables$(), $(l)logic processors$(), $(l)resource storages$() and even $(l)more durable materials$()!",
+
+  "book.atomiccore.entry.creators": "Creators",
+
+  "book.atomiccore.entry.creators.page.1": "All mod makers of $(l)$(#7118BC)$(l:curiosities/the_atomic_series)The Atomic Series$() are listed here. $(br2)Idea creator, artist and programmer - $(l)$(#FF2E00)Hantonik$()"
+}

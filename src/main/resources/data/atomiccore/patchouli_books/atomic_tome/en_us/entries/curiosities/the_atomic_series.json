@@ -1,0 +1,49 @@
+{
+  "name": "book.atomiccore.entry.the_atomic_series",
+  "category": "atomiccore:curiosities",
+  "icon": "atomiccore:textures/book/icons/the_atomic_series_icon.png",
+  "sortnum": 50,
+  "pages": [
+    {
+      "type": "text",
+      "text": "book.atomiccore.entry.the_atomic_series.page.1"
+    },
+    {
+      "type": "text",
+      "text": "book.atomiccore.entry.the_atomic_series.page.2"
+    },
+    {
+      "type": "text",
+      "text": "book.atomiccore.entry.the_atomic_series.page.3"
+    },
+    {
+      "type": "image",
+      "title": "Atomic Technology",
+      "images": [
+        "atomiccore:textures/book/images/atomic_technology_image.png"
+      ]
+    },
+    {
+      "type": "text",
+      "text": "book.atomiccore.entry.the_atomic_series.page.4"
+    },
+    {
+      "type": "image",
+      "title": "Atomic Components",
+      "images": [
+        "atomiccore:textures/book/images/atomic_components_image.png"
+      ]
+    },
+    {
+      "type": "text",
+      "text": "book.atomiccore.entry.the_atomic_series.page.5"
+    },
+    {
+      "type": "image",
+      "title": "Atomic Machines",
+      "images": [
+        "atomiccore:textures/book/images/atomic_machines_image.png"
+      ]
+    }
+  ]
+}

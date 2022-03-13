@@ -1,0 +1,28 @@
+{
+  "tooltip.atomiccore.crafting_component": "제작 구성 요소",
+  "tooltip.atomiccore.crafting": "제작: %sx %s",
+
+  "attributes.atomiccore.hold_for_info": "자세한 내용을 보려면 %s 를 길게 누르세요",
+
+  "attributes.atomiccore.melting_temperature": "녹는 온도",
+  "attributes.atomiccore.burning_temperature": "타는 온도",
+  "attributes.atomiccore.melting_time": "녹는 시간",
+  "attributes.atomiccore.burn_time": "굽는 시간",
+
+  "book.atomiccore.name": "원자서",
+
+  "book.atomiccore.landing_text": "$(l)$(#7118BC)$(l:curiosities/the_atomic_series)The Atomic Series$()의 개조 가이드 북. $(br2)이 가이드 북은 $(l)$(#7118BC)$(l:curiosities/the_atomic_series)The Atomic Series$()에서 더 많은 모드를 추가함에 따라 확장됩니다. 각 모드의 카테고리가 오른쪽에 나타납니다.",
+
+  "book.atomiccore.category.curiosities.name": "하찮은 일",
+  "book.atomiccore.category.curiosities.description": "여기에서 $(l)$(#7118BC)$(l:curiosities/the_atomic_series)The Atomic Series$() 프로젝트와 그 제작자에 대한 흥미로운 사실을 찾을 수 있습니다.",
+
+  "book.atomiccore.entry.the_atomic_series.page.1": "$(l)$(#7118BC)The Atomic Series$()는 $(l)$(l:curiosities/creators)Hantonik$()에서 만든 프로젝트입니다. $(br2)이 시리즈의 모든 모드는 서로 연결되어 있지만 모든 것을 작동시키기 위해 모두 추가할 필요는 없습니다.",
+  "book.atomiccore.entry.the_atomic_series.page.2": "이 시리즈의 모드를 실행하려면 $(l)$(#00A5FF)Atomic Core$() 라이브러리가 필요합니다. 여기에는 $(l)$(#7118BC)The Atomic Series$()의 각 모드 기능에 필요한 요소가 포함되어 있습니다.",
+  "book.atomiccore.entry.the_atomic_series.page.3": "이 시리즈의 모드로 완전한 게임 경험을 원한다면 $(l)$(#FF0072)Atomic Technology$() 모드를 설치할 수 있습니다. 이 모드는 $(l)$(#7118BC)The Atomic Series$()의 모든 모드를 하나로 게임에 추가합니다. 덕분에 수정 사항이 누락되어도 걱정할 필요가 없습니다.",
+  "book.atomiccore.entry.the_atomic_series.page.4": "$(l)$(#75EA00)Atomic Components$()는 게임에 기계를 만드는 데 필요한 재료를 추가하는 수정입니다. 그것은 기계의 다양한 구성 요소에 다양한 종류의 금속과 특성이 다른 합금을 포함합니다. $(l)이 수정 없이는 기계를 만들 수 없습니다!$()",
+  "book.atomiccore.entry.the_atomic_series.page.5": "$(l)$(#FF8800)Atomic Machines$()는 게임에서 유용할 수 있는 흥미로운 기계를 추가하는 모드입니다. $(br)$(l)에너지는 필수입니다$(), 에너지가 없으면 기계가 작동하지 않습니다. 여기에서 에너지를 생산하고 $(l)cables$(), $와 같은 놀라운 것을 만드는 데 사용하는 방법을 찾을 수 있습니다. (l)논리 프로세서$(), $(l)리소스 저장소$() 및 $(l)더 튼튼한 재료$()!",
+
+  "book.atomiccore.entry.creators": "크리에이터",
+
+  "book.atomiccore.entry.creators.page.1": "$(l)$(#7118BC)$(l:curiosities/the_atomic_series)The Atomic Series$()의 모든 모드 제작자가 여기에 나열됩니다. $(br2)아이디어 창작자, 아티스트, 프로그래머 - $(l)$(#FF2E00)Hantonik$()"
+}
