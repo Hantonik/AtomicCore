@@ -1,0 +1,35 @@
+{
+  "homepage": "https://www.curseforge.com/minecraft/mc-mods/atomiccore",
+
+  "promos": {
+    "1.18.2-latest": "4.1.1",
+    "1.18.2-recommended": "4.1.1",
+
+    "1.18.1-latest": "3.2.4",
+    "1.18.1-recommended": "3.2.2",
+
+    "1.18-latest": "3.0.0",
+    "1.18-recommended": "3.0.0"
+  },
+
+  "1.18.2": {
+    "4.1.1": "Added several facilities for modders",
+    "4.1.0": "Added Atomic tome",
+    "4.0.0": "Updated to Minecraft 1.18.2"
+  },
+
+  "1.18.1": {
+    "3.2.4": "Added Melting time stat to AttributedItem",
+    "3.2.3": "Fixed Burn time info color in AttributedItem",
+    "3.2.2": "Fixed AttributedItem",
+    "3.2.1": "Fixed ModelLoader not loading",
+    "3.2.0": "Added fluid registry",
+    "3.1.2": "Fixed tool problems",
+    "3.1.1": "Added another tooltip",
+    "3.1.0": "Updated to Minecraft 1.18.1"
+  },
+
+  "1.18": {
+    "3.0.0": "Updated to Minecraft 1.18"
+  }
+}
