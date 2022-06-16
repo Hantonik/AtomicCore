@@ -1,0 +1,19 @@
+{
+  "name": "book.atomiccore.entry.creators",
+  "category": "atomiccore:curiosities",
+  "icon": "minecraft:book",
+  "sortnum": 100,
+  "pages": [
+    {
+      "type": "text",
+      "text": "book.atomiccore.entry.creators.page.1"
+    },
+    {
+      "type": "image",
+      "title": "Hantonik",
+      "images": [
+        "atomiccore:textures/book/images/hantonik_image.png"
+      ]
+    }
+  ]
+}
