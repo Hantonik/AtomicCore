@@ -2,27 +2,5 @@
   "tooltip.atomiccore.crafting_component": "Компонент крафта",
   "tooltip.atomiccore.crafting": "Ремесло: %sx %s",
 
-  "attributes.atomiccore.hold_for_info": "Удерживайте %s для получения дополнительной информации",
-
-  "attributes.atomiccore.melting_temperature": "Температура плавления",
-  "attributes.atomiccore.burning_temperature": "Температура горения",
-  "attributes.atomiccore.melting_time": "время плавления",
-  "attributes.atomiccore.burn_time": "Время записи",
-
-  "book.atomiccore.name": "Атомная книга",
-
-  "book.atomiccore.landing_text": "Путеводитель по модам из $(l)$(#7118BC)$(l:curiosities/the_atomic_series)The Atomic Series$(). $(br2)Это руководство будет расширяться по мере добавления модов из $(l)$(#7118BC)$(l:curiosities/the_atomic_series)The Atomic Series$(). Категории для каждого мода появятся справа.",
-
-  "book.atomiccore.category.curiosities.name": "Мелочи",
-  "book.atomiccore.category.curiosities.description": "Здесь вы найдете интересные факты о проекте $(l)$(#7118BC)$(l:curiosities/the_atomic_series)The Atomic Series$() и его создателях.",
-
-  "book.atomiccore.entry.the_atomic_series.page.1": "$(l)$(#7118BC)The Atomic Series$() — это проект, созданный $(l)$(l:curiosities/creators)Hantonik$(). $(br2)Все моды этой серии связаны друг с другом, но вам не обязательно добавлять их все, чтобы все работало.",
-  "book.atomiccore.entry.the_atomic_series.page.2": "Для запуска любого мода из этой серии требуется библиотека $(l)$(#00A5FF)Atomic Core$(). Он содержит необходимые элементы для функционирования каждого мода из $(l)$(#7118BC)The Atomic Series$().",
-  "book.atomiccore.entry.the_atomic_series.page.3": "Если вы хотите получить полный игровой опыт с модами из этой серии, вы можете установить мод $(l)$(#FF0072)Atomic Technology$(). Этот мод добавляет все моды из $(l)$(#7118BC)The Atomic Series$() в игру как один. Благодаря этому вам не нужно беспокоиться, если вы пропустите какую-либо из модификаций.",
-  "book.atomiccore.entry.the_atomic_series.page.4": "$(l)$(#75EA00)Atomic Components$() — это модификация, которая добавляет в игру материалы, необходимые для создания машин. Он содержит металлы разных видов в различных компонентах машин и их сплавы с разными свойствами. $(l)Без этой модификации нельзя производить машины!$()",
-  "book.atomiccore.entry.the_atomic_series.page.5": "$(l)$(#FF8800)Atomic Machines$() — мод, добавляющий интересные машины, которые могут быть полезны в игре. $(br)$(l)Энергия необходима$(), без нее не будет работать ни одна машина, здесь вы найдете способ ее производить и использовать для создания удивительных вещей, таких как $(l)кабели$(), $(l)логические процессоры$(), $(l)хранилища ресурсов$() и даже $(l)более прочные материалы$()!",
-
-  "book.atomiccore.entry.creators": "Создатели",
-
-  "book.atomiccore.entry.creators.page.1": "Все производители модов для $(l)$(#7118BC)$(l:curiosities/the_atomic_series)The Atomic Series$() перечислены здесь. $(br2)Идеолог, художник и программист - $(l)$(#FF2E00)Hantonik$()"
+  "attributes.atomiccore.hold_for_info": "Удерживайте %s для получения дополнительной информации"
 }
