@@ -1,8 +1,18 @@
-plugins {
-    id 'idea'
-    id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '5.1.+'
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net/' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+    }
 }
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'maven-publish'
+apply plugin: 'idea'
+apply plugin: 'org.spongepowered.mixin'
 
 file('gradle.properties').withReader {
     def prop = new Properties()
@@ -17,11 +27,16 @@ archivesBaseName = "${config.mod_name}-${config.mc_version}"
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 repositories {
-    maven { url 'https://maven.blamejared.com' }
     mavenCentral()
 }
 
-println "Starting build of ${config.mod_name}, Version: ${config.mod_version}"
+mixin {
+    add sourceSets.main, "${config.mod_id}.refmap.json"
+
+    config "${config.mod_id}.mixins.json"
+}
+
+println "\nStarting build of ${config.mod_name}, Version: ${config.mod_version}"
 println "Using Forge: ${config.forge_version}, for Minecraft: ${config.mc_version}, with Mappings: ${config.mappings_version}-${config.mappings_channel}\n"
 
 minecraft {
@@ -73,8 +88,7 @@ minecraft {
 dependencies {
     minecraft "net.minecraftforge:forge:${config.mc_version}-${config.forge_version}"
 
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${config.mc_version}-${config.patchouli_version}-20220608.160738-1:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${config.mc_version}-${config.patchouli_version}-20220608.160738-1")
+    annotationProcessor "org.spongepowered:mixin:${config.mixin_processor_version}:processor"
 
     implementation 'com.google.errorprone:error_prone_annotation:2.14.0'
     implementation 'org.projectlombok:lombok:1.18.24'
@@ -102,7 +116,7 @@ processResources {
 }
 
 jar {
-    classifier = 'dev'
+//  classifier = 'dev'
 
     manifest {
         attributes([
