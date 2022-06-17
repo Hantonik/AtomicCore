@@ -1,18 +1,15 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net/' }
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
 
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'maven-publish'
 apply plugin: 'idea'
-apply plugin: 'org.spongepowered.mixin'
 
 file('gradle.properties').withReader {
     def prop = new Properties()
@@ -28,12 +25,6 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 repositories {
     mavenCentral()
-}
-
-mixin {
-    add sourceSets.main, "${config.mod_id}.refmap.json"
-
-    config "${config.mod_id}.mixins.json"
 }
 
 println "\nStarting build of ${config.mod_name}, Version: ${config.mod_version}"
@@ -52,9 +43,6 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', "${config.mod_id}"
 
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
             ideaModule "${rootProject.name}.${project.name}.main"
 
             mods {
@@ -71,9 +59,6 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', "${config.mod_id}"
 
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
             ideaModule "${rootProject.name}.${project.name}.main"
 
             mods {
@@ -87,8 +72,6 @@ minecraft {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${config.mc_version}-${config.forge_version}"
-
-    annotationProcessor "org.spongepowered:mixin:${config.mixin_processor_version}:processor"
 
     implementation 'com.google.errorprone:error_prone_annotation:2.14.0'
     implementation 'org.projectlombok:lombok:1.18.24'
