@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-@SuppressWarnings("unchecked")
 public abstract class RecipeBuilder<T extends RecipeBuilder<T>> {
     protected final List<ICondition> conditions = new ArrayList<>();
     protected final Advancement.Builder advancementBuilder = Advancement.Builder.advancement();
@@ -37,11 +36,13 @@ public abstract class RecipeBuilder<T extends RecipeBuilder<T>> {
         return addCriterion(criterion.name, criterion.criterion);
     }
 
+    @SuppressWarnings("unchecked")
     public T addCriterion(String name, CriterionTriggerInstance criterion) {
         advancementBuilder.addCriterion(name, criterion);
         return (T) this;
     }
 
+    @SuppressWarnings("unchecked")
     public T addCondition(ICondition condition) {
         conditions.add(condition);
         return (T) this;
