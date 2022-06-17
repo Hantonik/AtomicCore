@@ -4,6 +4,7 @@ import hantonik.atomiccore.utils.handlers.BasicItemStackHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -14,7 +15,7 @@ import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
 
-public abstract class BasicInventoryTileEntity extends BasicTileEntity {
+public abstract class BasicInventoryTileEntity extends BasicTileEntity implements MenuProvider {
     private final LazyOptional<IItemHandler> capability = LazyOptional.of(this::getInventory);
 
     public BasicInventoryTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
