@@ -2,7 +2,7 @@
   "homepage": "https://www.curseforge.com/minecraft/mc-mods/atomiccore",
 
   "promos": {
-    "1.19-latest": "5.0.0",
+    "1.19-latest": "5.0.1",
     "1.19-recommended": "5.0.0",
 	  
     "1.18.2-latest": "4.1.1",
@@ -16,6 +16,7 @@
   },
 
   "1.19": {
+	"5.0.1": "Forge bug fixed so mixins removed",
 	"5.0.0": "Updated to Minecraft 1.19"
   },
 
