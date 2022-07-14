@@ -4,15 +4,16 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
-public class Localizable {
+@Deprecated(forRemoval = true)
+public final class Localizable {
     private final String key;
     private final ChatFormatting defaultColor;
 
-    protected Localizable(String key) {
+    private Localizable(String key) {
         this(key, null);
     }
 
-    protected Localizable(String key, ChatFormatting defaultColor) {
+    private Localizable(String key, ChatFormatting defaultColor) {
         this.key = key;
         this.defaultColor = defaultColor;
     }
@@ -69,29 +70,30 @@ public class Localizable {
 
         public LocalizableBuilder args(Object... args) {
             this.args = args;
+
             return this;
         }
 
         public LocalizableBuilder color(ChatFormatting color) {
             this.color = color;
+
             return this;
         }
 
         public LocalizableBuilder prepend(String text) {
             this.prependText += text;
+
             return this;
         }
 
         public MutableComponent build() {
-            MutableComponent component = Component.translatable(this.key, this.args);
+            var component = Component.translatable(this.key, this.args);
 
-            if (!prependText.equals("")) {
-                component = Component.literal(prependText).append(component);
-            }
+            if (!this.prependText.equals(""))
+                component = Component.literal(this.prependText).append(component);
 
-            if (this.color != null) {
+            if (this.color != null)
                 component.withStyle(this.color);
-            }
 
             return component;
         }

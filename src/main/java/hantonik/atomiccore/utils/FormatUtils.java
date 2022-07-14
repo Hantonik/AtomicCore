@@ -1,13 +1,15 @@
 package hantonik.atomiccore.utils;
 
-public class FormatUtils {
+@Deprecated(forRemoval = true)
+public final class FormatUtils {
+    @Deprecated(forRemoval = true)
     public static String formatTime(long time, TimeUnit unit, TimeUnit precision, boolean only) {
         if (time == 0)
             return 0 + "t";
 
-        StringBuilder output = new StringBuilder();
+        var output = new StringBuilder();
 
-        long helper = time;
+        var helper = time;
 
         if (unit == TimeUnit.SECONDS)
             helper = time * 20;
@@ -97,13 +99,16 @@ public class FormatUtils {
         return output.deleteCharAt(output.length() - 1).toString();
     }
 
+    @Deprecated(forRemoval = true)
     public static String format(long l, UniversalUnit unit, UniversalUnit precision, String suffix, boolean only) {
         if (l == 0)
             return 0 + " " + suffix;
 
-        StringBuilder output = new StringBuilder();
+        var output = new StringBuilder();
 
-        long helper = l * unit.getMultiplier();
+        var helper = l * unit.getMultiplier();
+
+        boolean contains = output.toString().contains(" " + suffix);
 
         if (helper % 1000 > 0 || precision == UniversalUnit.NONE) {
             if (precision == UniversalUnit.NONE)
@@ -146,7 +151,7 @@ public class FormatUtils {
                         output.insert(0, helper / 1000 + " " + precision.getSymbol() + suffix + " ");
 
                         if (only) {
-                            if (output.toString().contains(" " + suffix))
+                            if (contains)
                                 return output.deleteCharAt(output.length() - 1).delete(output.indexOf(" ", output.indexOf(" ") + 1), output.lastIndexOf(" " + suffix) + suffix.length() + 1).toString();
                             if (output.toString().contains(" " + UniversalUnit.KILO.getSymbol() + suffix))
                                 return output.deleteCharAt(output.length() - 1).delete(output.indexOf(" ", output.indexOf(" ") + 1), output.lastIndexOf(" " + UniversalUnit.KILO.getSymbol() + suffix) + (UniversalUnit.KILO.getSymbol() + suffix).length()).toString();
@@ -157,7 +162,7 @@ public class FormatUtils {
                         }
                     } else {
                         if (only) {
-                            if (output.toString().contains(" " + suffix))
+                            if (contains)
                                 return output.deleteCharAt(output.length() - 1).delete(output.indexOf(" ", output.indexOf(" ") + 1), output.lastIndexOf(" " + suffix) + suffix.length() + 1).toString();
                             if (output.toString().contains(" " + UniversalUnit.KILO.getSymbol() + suffix))
                                 return output.deleteCharAt(output.length() - 1).delete(output.indexOf(" ", output.indexOf(" ") + 1), output.lastIndexOf(" " + UniversalUnit.KILO.getSymbol() + suffix) + (UniversalUnit.KILO.getSymbol() + suffix).length()).toString();
@@ -167,7 +172,7 @@ public class FormatUtils {
                     }
                 } else {
                     if (only) {
-                        if (output.toString().contains(" " + suffix))
+                        if (contains)
                             return output.deleteCharAt(output.length() - 1).delete(output.indexOf(" ", output.indexOf(" ") + 1), output.lastIndexOf(" " + suffix) + suffix.length() + 1).toString();
                         if (output.toString().contains(" " + UniversalUnit.KILO.getSymbol() + suffix))
                             return output.deleteCharAt(output.length() - 1).delete(output.indexOf(" ", output.indexOf(" ") + 1), output.lastIndexOf(" " + UniversalUnit.KILO.getSymbol() + suffix) + (UniversalUnit.KILO.getSymbol() + suffix).length()).toString();
@@ -175,7 +180,7 @@ public class FormatUtils {
                 }
             } else {
                 if (only) {
-                    if (output.toString().contains(" " + suffix))
+                    if (contains)
                         return output.deleteCharAt(output.length() - 1).delete(output.indexOf(" ", output.indexOf(" ") + 1), output.lastIndexOf(suffix) + suffix.length() + 1).toString();
                 }
             }
@@ -184,6 +189,7 @@ public class FormatUtils {
         return output.deleteCharAt(output.length() - 1).toString();
     }
 
+    @Deprecated(forRemoval = true)
     public enum UniversalUnit {
         NONE("" , 1),
         KILO("k", 1_000),
@@ -199,15 +205,18 @@ public class FormatUtils {
             this.multiplier = multiplier;
         }
 
+        @Deprecated(forRemoval = true)
         public long getMultiplier() {
             return this.multiplier;
         }
 
+        @Deprecated(forRemoval = true)
         public String getSymbol() {
             return this.symbol;
         }
     }
 
+    @Deprecated(forRemoval = true)
     public enum TimeUnit {
         TICKS,
         SECONDS,
