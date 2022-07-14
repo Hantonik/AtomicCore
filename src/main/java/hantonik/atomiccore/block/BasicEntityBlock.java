@@ -12,16 +12,16 @@ import net.minecraft.world.level.material.Material;
 import javax.annotation.Nonnull;
 import java.util.function.Function;
 
-public abstract class BasicTileBlock extends BasicBlock implements EntityBlock {
-    public BasicTileBlock(Material material, Function<Properties, Properties> properties) {
+public abstract class BasicEntityBlock extends BasicBlock implements EntityBlock {
+    public BasicEntityBlock(Material material, Function<Properties, Properties> properties) {
         super(material, properties);
     }
 
-    public BasicTileBlock(Material material, SoundType sound, float hardness, float resistance) {
+    public BasicEntityBlock(Material material, SoundType sound, float hardness, float resistance) {
         super(material, sound, hardness, resistance);
     }
 
-    public BasicTileBlock(Material material, SoundType sound, float hardness, float resistance, boolean tool) {
+    public BasicEntityBlock(Material material, SoundType sound, float hardness, float resistance, boolean tool) {
         super(material, sound, hardness, resistance, tool);
     }
 

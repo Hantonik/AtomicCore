@@ -13,11 +13,11 @@ import java.util.function.Supplier;
 @SuppressWarnings("WeakerAccess")
 public abstract class DeferredRegisterWrapper<T> {
     protected final DeferredRegister<T> register;
-    private final String modID;
+    private final String modId;
 
-    protected DeferredRegisterWrapper(IForgeRegistry<T> reg, String modID) {
-        this.register = DeferredRegister.create(reg, modID);
-        this.modID = modID;
+    protected DeferredRegisterWrapper(IForgeRegistry<T> reg, String modId) {
+        this.register = DeferredRegister.create(reg, modId);
+        this.modId = modId;
     }
 
     public void register(IEventBus bus) {
@@ -25,11 +25,11 @@ public abstract class DeferredRegisterWrapper<T> {
     }
 
     protected ResourceLocation resource(String name) {
-        return new ResourceLocation(this.modID, name);
+        return new ResourceLocation(this.modId, name);
     }
 
     protected String resourceName(String name) {
-        return this.modID + ":" + name;
+        return this.modId + ":" + name;
     }
 
     protected static <E extends Enum<E> & StringRepresentable, V extends T, T extends IForgeRegistry<T>> EnumObject<E, V> registerEnum(E[] values, String name, BiFunction<String, E, Supplier<? extends V>> register) {
@@ -38,7 +38,7 @@ public abstract class DeferredRegisterWrapper<T> {
 
         EnumObject.Builder<E,V> builder = new EnumObject.Builder<>(values[0].getDeclaringClass());
 
-        for (E value : values)
+        for (var value : values)
             builder.put(value, register.apply(value.getSerializedName() + "_" + name, value));
 
         return builder.build();
@@ -50,7 +50,7 @@ public abstract class DeferredRegisterWrapper<T> {
 
         EnumObject.Builder<E, V> builder = new EnumObject.Builder<>(values[0].getDeclaringClass());
 
-        for (E value : values)
+        for (var value : values)
             builder.put(value, register.apply(name + "_" + value.getSerializedName(), value));
 
         return builder.build();

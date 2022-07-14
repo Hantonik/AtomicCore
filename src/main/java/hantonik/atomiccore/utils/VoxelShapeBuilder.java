@@ -9,7 +9,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.Map;
 import java.util.function.Function;
 
-public final class ShapeCache {
+public final class VoxelShapeBuilder {
     private static final Map<BlockState, VoxelShape> CACHE = Maps.newHashMap();
 
     private VoxelShape leftShape;
@@ -19,8 +19,8 @@ public final class ShapeCache {
         return CACHE.computeIfAbsent(state, shapeFactory);
     }
 
-    public static ShapeCache fromShapes(VoxelShape... shapes) {
-        var builder = new ShapeCache();
+    public static VoxelShapeBuilder fromShapes(VoxelShape... shapes) {
+        var builder = new VoxelShapeBuilder();
 
         for (var shape : shapes)
             builder.shape(shape);
@@ -28,7 +28,7 @@ public final class ShapeCache {
         return builder;
     }
 
-    public ShapeCache shape(VoxelShape shape) {
+    public VoxelShapeBuilder shape(VoxelShape shape) {
         if (this.leftShape == null)
             this.leftShape = shape;
 
@@ -47,7 +47,7 @@ public final class ShapeCache {
         return this;
     }
 
-    public ShapeCache cuboid(double x1, double y1, double z1, double x2, double y2, double z2) {
+    public VoxelShapeBuilder cuboid(double x1, double y1, double z1, double x2, double y2, double z2) {
         var shape = Block.box(x1, y1, z1, x2, y2, z2);
 
         return this.shape(shape);

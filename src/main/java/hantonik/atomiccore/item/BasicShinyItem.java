@@ -1,4 +1,4 @@
-package hantonik.atomiccore.items;
+package hantonik.atomiccore.item;
 
 import net.minecraft.world.item.ItemStack;
 

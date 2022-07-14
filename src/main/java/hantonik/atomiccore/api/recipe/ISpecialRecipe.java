@@ -1,4 +1,4 @@
-package hantonik.atomiccore.crafting;
+package hantonik.atomiccore.api.recipe;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
@@ -34,9 +34,8 @@ public interface ISpecialRecipe extends Recipe<Container> {
     default boolean matches(IItemHandler inventory, int startIndex, int endIndex) {
         NonNullList<ItemStack> inputs = NonNullList.create();
 
-        for (var i = startIndex; i < endIndex; i++) {
+        for (var i = startIndex; i < endIndex; i++)
             inputs.add(inventory.getStackInSlot(i));
-        }
 
         return RecipeMatcher.findMatches(inputs, this.getIngredients()) != null;
     }
@@ -44,11 +43,11 @@ public interface ISpecialRecipe extends Recipe<Container> {
     default NonNullList<ItemStack> getRemainingItems(IItemHandler inventory) {
         var remaining = NonNullList.withSize(inventory.getSlots(), ItemStack.EMPTY);
 
-        for (int i = 0; i < remaining.size(); i++) {
+        for (var i = 0; i < remaining.size(); i++) {
             var stack = inventory.getStackInSlot(i);
 
-            if (stack.hasContainerItem())
-                remaining.set(i, stack.getContainerItem());
+            if (stack.hasCraftingRemainingItem())
+                remaining.set(i, stack.getCraftingRemainingItem());
         }
 
         return remaining;

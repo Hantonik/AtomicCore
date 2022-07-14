@@ -1,6 +1,6 @@
-package hantonik.atomiccore.tiles;
+package hantonik.atomiccore.block.entity;
 
-import hantonik.atomiccore.utils.helpers.TileHelper;
+import hantonik.atomiccore.utils.helpers.BlockEntityHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -9,8 +9,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public abstract class BasicTileEntity extends BlockEntity {
-    public BasicTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+public abstract class BasicBlockEntity extends BlockEntity {
+    public BasicBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
@@ -41,6 +41,6 @@ public abstract class BasicTileEntity extends BlockEntity {
     public void markDirtyAndDispatch() {
         super.setChanged();
 
-        TileHelper.dispatchToNearbyPlayers(this);
+        BlockEntityHelper.dispatchToNearbyPlayers(this);
     }
 }

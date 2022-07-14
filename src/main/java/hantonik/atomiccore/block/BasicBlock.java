@@ -5,7 +5,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -41,7 +40,7 @@ public class BasicBlock extends Block {
         if (facing == null)
             return false;
 
-        BlockEntity neighbor = world.getBlockEntity(facingPos);
+        var neighbor = world.getBlockEntity(facingPos);
 
         return neighbor != null && neighbor.getCapability(capability, facing.getOpposite()).isPresent();
     }

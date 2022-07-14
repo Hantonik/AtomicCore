@@ -13,9 +13,9 @@ public class DelayedSupplier<T> implements Supplier<T> {
 
     @Override
     public T get() {
-        if (supplier == null)
+        if (this.supplier == null)
             throw new IllegalStateException("Attempted to call DelayedSupplier::get() before the supplier was set");
 
-        return supplier.get();
+        return this.supplier.get();
     }
 }

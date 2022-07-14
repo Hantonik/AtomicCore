@@ -1,9 +1,12 @@
 package hantonik.atomiccore.utils.helpers;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class NBTHelper {
     public static void setTag(ItemStack stack, String key, Tag value) {
         getTagCompound(stack).put(key, value);
@@ -107,11 +110,8 @@ public final class NBTHelper {
     }
 
     public static void validateCompound(ItemStack stack) {
-        if (!stack.hasTag()) {
-            var tag = new CompoundTag();
-
-            stack.setTag(tag);
-        }
+        if (!stack.hasTag())
+            stack.setTag(new CompoundTag());
     }
 
     public static CompoundTag getTagCompound(ItemStack stack) {

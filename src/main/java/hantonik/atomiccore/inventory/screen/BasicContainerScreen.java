@@ -1,8 +1,7 @@
-package hantonik.atomiccore.inventory.screens;
+package hantonik.atomiccore.inventory.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import hantonik.atomiccore.utils.Localizable;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -32,7 +31,9 @@ public abstract class BasicContainerScreen<T extends AbstractContainerMenu> exte
     @Override
     public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(stack);
+
         super.render(stack, mouseX, mouseY, partialTicks);
+
         this.renderTooltip(stack, mouseX, mouseY);
     }
 
@@ -48,6 +49,6 @@ public abstract class BasicContainerScreen<T extends AbstractContainerMenu> exte
     }
 
     protected String text(String key, Object... args) {
-        return Localizable.of(key).args(args).buildString();
+        return Component.translatable(key, args).getString();
     }
 }

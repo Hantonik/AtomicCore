@@ -17,12 +17,11 @@ public class AtomicItemEnergyStorage extends AtomicEnergyStorage {
 
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
-        int received = super.receiveEnergy(maxReceive, simulate);
+        var received = super.receiveEnergy(maxReceive, simulate);
 
         if (received > 0 && !simulate) {
-            if (!this.stack.hasTag()) {
+            if (!this.stack.hasTag())
                 this.stack.setTag(new CompoundTag());
-            }
 
             this.stack.getTag().putInt(NBT_ENERGY, getEnergyStored());
         }
@@ -32,12 +31,11 @@ public class AtomicItemEnergyStorage extends AtomicEnergyStorage {
 
     @Override
     public int extractEnergy(int maxExtract, boolean simulate) {
-        int extracted = super.extractEnergy(maxExtract, simulate);
+        var extracted = super.extractEnergy(maxExtract, simulate);
 
         if (extracted > 0 && !simulate) {
-            if (!this.stack.hasTag()) {
+            if (!this.stack.hasTag())
                 this.stack.setTag(new CompoundTag());
-            }
 
             this.stack.getTag().putInt(NBT_ENERGY, getEnergyStored());
         }

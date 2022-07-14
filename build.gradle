@@ -23,10 +23,6 @@ archivesBaseName = "${config.mod_name}-${config.mc_version}"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-repositories {
-    mavenCentral()
-}
-
 println "\nStarting build of ${config.mod_name}, Version: ${config.mod_version}"
 println "Using Forge: ${config.forge_version}, for Minecraft: ${config.mc_version}, with Mappings: ${config.mappings_version}-${config.mappings_channel}\n"
 
@@ -70,6 +66,10 @@ minecraft {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     minecraft "net.minecraftforge:forge:${config.mc_version}-${config.forge_version}"
 
@@ -99,7 +99,7 @@ processResources {
 }
 
 jar {
-//  classifier = 'dev'
+    classifier = 'dev'
 
     manifest {
         attributes([

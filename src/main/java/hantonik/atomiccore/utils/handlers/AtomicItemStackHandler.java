@@ -11,19 +11,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-public class BasicItemStackHandler extends ItemStackHandler {
+public class AtomicItemStackHandler extends ItemStackHandler {
     private final Runnable onContentsChanged;
     private final Map<Integer, Integer> slotSizeMap;
     private BiFunction<Integer, ItemStack, Boolean> slotValidator = null;
     private int maxStackSize = 64;
     private int[] outputSlots = null;
 
-    public BasicItemStackHandler(int size) {
+    public AtomicItemStackHandler(int size) {
         this(size, null);
     }
 
-    public BasicItemStackHandler(int size, Runnable onContentsChanged) {
+    public AtomicItemStackHandler(int size, Runnable onContentsChanged) {
         super(size);
+
         this.onContentsChanged = onContentsChanged;
         this.slotSizeMap = new HashMap<>();
     }
@@ -96,8 +97,8 @@ public class BasicItemStackHandler extends ItemStackHandler {
         return new SimpleContainer(this.stacks.toArray(new ItemStack[0]));
     }
 
-    public BasicItemStackHandler copy() {
-        var newInventory = new BasicItemStackHandler(this.getSlots(), this.onContentsChanged);
+    public AtomicItemStackHandler copy() {
+        var newInventory = new AtomicItemStackHandler(this.getSlots(), this.onContentsChanged);
 
         newInventory.setDefaultSlotLimit(this.maxStackSize);
         newInventory.setSlotValidator(this.slotValidator);

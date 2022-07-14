@@ -2,7 +2,6 @@ package hantonik.atomiccore.crafting.recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import hantonik.atomiccore.utils.Criteria;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -32,29 +31,27 @@ public abstract class RecipeBuilder<T extends RecipeBuilder<T>> {
         this.serializerName = serializerName;
     }
 
-    public T addCriterion(Criteria.RecipeCriterion criterion) {
-        return addCriterion(criterion.name, criterion.criterion);
-    }
-
     @SuppressWarnings("unchecked")
     public T addCriterion(String name, CriterionTriggerInstance criterion) {
-        advancementBuilder.addCriterion(name, criterion);
+        this.advancementBuilder.addCriterion(name, criterion);
+
         return (T) this;
     }
 
     @SuppressWarnings("unchecked")
     public T addCondition(ICondition condition) {
-        conditions.add(condition);
+        this.conditions.add(condition);
+
         return (T) this;
     }
 
     protected abstract RecipeResult getResult(ResourceLocation id);
 
     public void build(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
-        if (advancementBuilder.getCriteria().isEmpty())
+        if (this.advancementBuilder.getCriteria().isEmpty())
             throw new IllegalStateException("No way of obtaining recipe " + id);
 
-        advancementBuilder.parent(new ResourceLocation("recipes/root"))
+        this.advancementBuilder.parent(new ResourceLocation("recipes/root"))
                 .addCriterion("has_the_recipe", new RecipeUnlockedTrigger.TriggerInstance(EntityPredicate.Composite.ANY, id))
                 .rewards(AdvancementRewards.Builder.recipe(id)).requirements(RequirementsStrategy.OR);
         consumer.accept(getResult(id));
@@ -71,13 +68,14 @@ public abstract class RecipeBuilder<T extends RecipeBuilder<T>> {
 
         @Override
         public JsonObject serializeRecipe() {
-            JsonObject jsonObject = new JsonObject();
+            var jsonObject = new JsonObject();
+
             jsonObject.addProperty("type", serializerName.toString());
 
             if (!conditions.isEmpty()) {
-                JsonArray conditionsArray = new JsonArray();
+                var conditionsArray = new JsonArray();
 
-                for (ICondition condition : conditions)
+                for (var condition : conditions)
                     conditionsArray.add(CraftingHelper.serialize(condition));
 
                 jsonObject.add("conditions", conditionsArray);

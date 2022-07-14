@@ -22,11 +22,11 @@ public class EnumObject<T extends Enum<T>, I extends IForgeRegistry<? super I>> 
 
     @Nullable
     public Supplier<? extends I> getSupplier(T value) {
-        return map.get(value);
+        return this.map.get(value);
     }
 
     public I get(T value) {
-        Supplier<? extends I> supplier = map.get(value);
+        var supplier = this.map.get(value);
 
         if (supplier == null)
             throw new NoSuchElementException("Missing key " + value);
@@ -36,7 +36,7 @@ public class EnumObject<T extends Enum<T>, I extends IForgeRegistry<? super I>> 
 
     @Nullable
     public I getOrNull(T value) {
-        Supplier<? extends I> supplier = map.get(value);
+        var supplier = this.map.get(value);
 
         if (supplier == null)
             return null;
@@ -76,8 +76,8 @@ public class EnumObject<T extends Enum<T>, I extends IForgeRegistry<? super I>> 
     }
 
     @SuppressWarnings("unchecked")
-    public static <T extends Enum<T>, I extends IForgeRegistry<? super I>> EnumObject<T,I> empty() {
-        return (EnumObject<T,I>) EMPTY;
+    public static <T extends Enum<T>, I extends IForgeRegistry<? super I>> EnumObject<T, I> empty() {
+        return (EnumObject<T, I>) EMPTY;
     }
 
     @SuppressWarnings({"UnusedReturnValue", "unused"})
@@ -107,7 +107,7 @@ public class EnumObject<T extends Enum<T>, I extends IForgeRegistry<? super I>> 
         }
 
         public EnumObject<T,I> build() {
-            return new EnumObject<>(map);
+            return new EnumObject<>(this.map);
         }
     }
 }

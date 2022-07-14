@@ -1,11 +1,14 @@
 package hantonik.atomiccore.utils.helpers;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-public final class TileHelper {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class BlockEntityHelper {
     public static void dispatchToNearbyPlayers(BlockEntity tile) {
         var level = tile.getLevel();
 
@@ -21,9 +24,9 @@ public final class TileHelper {
         var pos = tile.getBlockPos();
 
         for (var player : players) {
-            if (player instanceof ServerPlayer mPlayer)
-                if (isPlayerNearby(mPlayer.getX(), mPlayer.getZ(), pos.getX() + 0.5, pos.getZ() + 0.5))
-                    mPlayer.connection.send(packet);
+            if (player instanceof ServerPlayer serverPlayer)
+                if (isPlayerNearby(serverPlayer.getX(), serverPlayer.getZ(), pos.getX() + 0.5, pos.getZ() + 0.5))
+                    serverPlayer.connection.send(packet);
         }
     }
 

@@ -1,16 +1,18 @@
 package hantonik.atomiccore.utils.helpers;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Arrays;
-import java.util.Set;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class StackHelper {
     public static ItemStack withSize(ItemStack stack, int size, boolean container) {
         if (size <= 0) {
-            if (container && stack.hasContainerItem())
-                return stack.getContainerItem();
+            if (container && stack.hasCraftingRemainingItem())
+                return stack.getCraftingRemainingItem();
 
             else
                 return ItemStack.EMPTY;
@@ -38,9 +40,9 @@ public final class StackHelper {
     }
 
     public static boolean areItemsEqual(ItemStack[] stacks1, ItemStack[] stacks2) {
-        boolean mark = true;
+        var mark = true;
 
-        for (ItemStack stack : stacks2) {
+        for (var stack : stacks2) {
             if (!mark)
                 break;
 
@@ -56,9 +58,9 @@ public final class StackHelper {
     }
 
     public static boolean areStacksEqual(ItemStack[] stacks1, ItemStack[] stacks2) {
-        boolean mark = true;
+        var mark = true;
 
-        for (ItemStack stack : stacks2) {
+        for (var stack : stacks2) {
             if (!mark)
                 break;
 
@@ -90,10 +92,10 @@ public final class StackHelper {
         if (stack1.hasTag() && !stack2.hasTag())
             return false;
 
-        Set<String> stack1Keys = NBTHelper.getTagCompound(stack1).getAllKeys();
-        Set<String> stack2Keys = NBTHelper.getTagCompound(stack2).getAllKeys();
+        var stack1Keys = NBTHelper.getTagCompound(stack1).getAllKeys();
+        var stack2Keys = NBTHelper.getTagCompound(stack2).getAllKeys();
 
-        for (String key : stack1Keys) {
+        for (var key : stack1Keys) {
             if (stack2Keys.contains(key)) {
                 if (!NbtUtils.compareNbt(NBTHelper.getTag(stack1, key), NBTHelper.getTag(stack2, key), true))
                     return false;

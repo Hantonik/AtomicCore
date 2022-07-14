@@ -1,6 +1,6 @@
-package hantonik.atomiccore.tiles;
+package hantonik.atomiccore.block.entity;
 
-import hantonik.atomiccore.utils.handlers.BasicItemStackHandler;
+import hantonik.atomiccore.utils.handlers.AtomicItemStackHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -15,14 +15,14 @@ import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
 
-public abstract class BasicInventoryTileEntity extends BasicTileEntity implements MenuProvider {
+public abstract class BasicInventoryBlockEntity extends BasicBlockEntity implements MenuProvider {
     private final LazyOptional<IItemHandler> capability = LazyOptional.of(this::getInventory);
 
-    public BasicInventoryTileEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public BasicInventoryBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
-    public abstract BasicItemStackHandler getInventory();
+    public abstract AtomicItemStackHandler getInventory();
 
     @Override
     public void load(CompoundTag tag) {
@@ -48,8 +48,6 @@ public abstract class BasicInventoryTileEntity extends BasicTileEntity implement
     }
 
     public boolean isUsableByPlayer(Player player) {
-        BlockPos pos = this.getBlockPos();
-
-        return player.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) <= 64;
+        return player.distanceToSqr(this.getBlockPos().getX() + 0.5, this.getBlockPos().getY() + 0.5, this.getBlockPos().getZ() + 0.5) <= 64;
     }
 }
