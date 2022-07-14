@@ -28,7 +28,7 @@ public class FluidBuilder {
     }
 
     public ForgeFlowingFluid.Properties build(Supplier<? extends Fluid> still, Supplier<? extends Fluid> flowing) {
-        ForgeFlowingFluid.Properties properties = (new ForgeFlowingFluid.Properties(() -> new FluidType(this.properties), still, flowing)).slopeFindDistance(this.slopeFindDistance).levelDecreasePerBlock(this.levelDecreasePerBlock).explosionResistance(this.explosionResistance).tickRate(this.tickRate).block(this.block).bucket(this.bucket);
+        var properties = (new ForgeFlowingFluid.Properties(() -> new FluidType(this.properties), still, flowing)).slopeFindDistance(this.slopeFindDistance).levelDecreasePerBlock(this.levelDecreasePerBlock).explosionResistance(this.explosionResistance).tickRate(this.tickRate).block(this.block).bucket(this.bucket);
 
         if (this.canConvertToSource)
             this.properties.canConvertToSource(this.canConvertToSource);

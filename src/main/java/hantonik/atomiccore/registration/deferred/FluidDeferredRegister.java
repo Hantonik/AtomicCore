@@ -27,11 +27,11 @@ public class FluidDeferredRegister extends DeferredRegisterWrapper<Fluid> {
     private final DeferredRegister<Block> blockRegister;
     private final DeferredRegister<Item> itemRegister;
 
-    public FluidDeferredRegister(String modID) {
-        super(ForgeRegistries.FLUIDS, modID);
+    public FluidDeferredRegister(String modId) {
+        super(ForgeRegistries.FLUIDS, modId);
 
-        this.blockRegister = DeferredRegister.create(ForgeRegistries.BLOCKS, modID);
-        this.itemRegister = DeferredRegister.create(ForgeRegistries.ITEMS, modID);
+        this.blockRegister = DeferredRegister.create(ForgeRegistries.BLOCKS, modId);
+        this.itemRegister = DeferredRegister.create(ForgeRegistries.ITEMS, modId);
     }
 
     public void register(IEventBus bus) {
@@ -52,7 +52,7 @@ public class FluidDeferredRegister extends DeferredRegisterWrapper<Fluid> {
         RegistryObject<LiquidBlock> blockObj = this.blockRegister.register(name + "_fluid", () -> block.apply(stillDelayed));
         builder.bucket(this.itemRegister.register(name + "_bucket", () -> new BucketItem(stillDelayed, ItemProperties.BUCKET_PROPS)));
 
-        Properties props = builder.block(blockObj).build(stillDelayed, flowingDelayed);
+        var props = builder.block(blockObj).build(stillDelayed, flowingDelayed);
 
         Supplier<F> stillSup = registerFluid(name, () -> still.apply(props));
         stillDelayed.setSupplier(stillSup);

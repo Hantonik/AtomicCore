@@ -2,6 +2,8 @@ package hantonik.atomiccore.utils.helpers;
 
 import com.google.gson.*;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -16,11 +18,12 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class FluidHelper {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
     public static JsonObject serialize(FluidStack stack) {
-        JsonObject json = new JsonObject();
+        var json = new JsonObject();
 
         json.addProperty("fluid", Objects.requireNonNull(Registry.FLUID.getKey(stack.getFluid())).toString());
         json.addProperty("count", stack.getAmount());
@@ -32,18 +35,18 @@ public final class FluidHelper {
     }
 
     public static FluidStack deserializeStack(JsonObject json) {
-        String fluidName = GsonHelper.getAsString(json, "fluid");
-        int amount = GsonHelper.getAsInt(json, "amount", 1000);
-        ResourceLocation fluidKey = new ResourceLocation(fluidName);
+        var fluidName = GsonHelper.getAsString(json, "fluid");
+        var amount = GsonHelper.getAsInt(json, "amount", 1000);
+        var fluidKey = new ResourceLocation(fluidName);
 
         if (!ForgeRegistries.FLUIDS.containsKey(fluidKey))
             throw new JsonSyntaxException("Unknown item '" + fluidName + "'");
 
-        Fluid fluid = ForgeRegistries.FLUIDS.getValue(fluidKey);
+        var fluid = ForgeRegistries.FLUIDS.getValue(fluidKey);
 
         if (json.has("nbt")) {
             try {
-                JsonElement element = json.get("nbt");
+                var element = json.get("nbt");
                 CompoundTag nbt;
 
                 if (element.isJsonObject())
@@ -51,7 +54,7 @@ public final class FluidHelper {
                 else
                     nbt = TagParser.parseTag(GsonHelper.convertToString(element, "nbt"));
 
-                CompoundTag tmp = new CompoundTag();
+                var tmp = new CompoundTag();
 
                 tmp.put("Tag", nbt);
                 tmp.putString("FluidName", fluidName);
@@ -67,7 +70,7 @@ public final class FluidHelper {
     }
 
     public static JsonObject serialize(Fluid fluid) {
-        JsonObject json = new JsonObject();
+        var json = new JsonObject();
 
         json.addProperty("fluid", Objects.requireNonNull(Registry.FLUID.getKey(fluid)).toString());
 
@@ -76,10 +79,10 @@ public final class FluidHelper {
 
     public static Fluid deserializeFluid(JsonObject json) {
         if (json.has("fluid")) {
-            JsonElement element = json.get("fluid");
+            var element = json.get("fluid");
 
             if (element.isJsonPrimitive()) {
-                String id = element.getAsString();
+                var id = element.getAsString();
 
                 return Registry.FLUID.getOptional(new ResourceLocation(id)).orElseThrow(() -> new JsonSyntaxException("Expected fluid to be an fluid, was unknown string '" + id + "'"));
             } else
@@ -116,7 +119,7 @@ public final class FluidHelper {
     public static boolean areFluidsEqual(FluidStack[] stacks1, FluidStack[] stacks2) {
         boolean mark = true;
 
-        for (FluidStack stack : stacks2) {
+        for (var stack : stacks2) {
             if (!mark)
                 break;
 
@@ -134,7 +137,7 @@ public final class FluidHelper {
     public static boolean areStacksEqual(FluidStack[] stacks1, FluidStack[] stacks2) {
         boolean mark = true;
 
-        for (FluidStack stack : stacks2) {
+        for (var stack : stacks2) {
             if (!mark)
                 break;
 

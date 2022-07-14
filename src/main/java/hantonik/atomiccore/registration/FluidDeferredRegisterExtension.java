@@ -9,8 +9,8 @@ import net.minecraftforge.fluids.ForgeFlowingFluid;
 import java.util.function.Function;
 
 public class FluidDeferredRegisterExtension extends FluidDeferredRegister {
-    public FluidDeferredRegisterExtension(String modID) {
-        super(modID);
+    public FluidDeferredRegisterExtension(String modId) {
+        super(modId);
     }
 
     public <F extends ForgeFlowingFluid> FluidObject<F> register(String name, String tagName, FluidType.Properties properties, Function<ForgeFlowingFluid.Properties, ? extends F> still, Function<ForgeFlowingFluid.Properties, ? extends F> flowing, Material material, int lightLevel) {
