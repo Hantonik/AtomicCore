@@ -99,7 +99,7 @@ processResources {
 }
 
 jar {
-    classifier = 'dev'
+//  classifier = 'dev'
 
     manifest {
         attributes([
