@@ -42,7 +42,10 @@ public abstract class BasicDirectionalBlockEntity extends BasicBlockEntity {
     }
 
     @NotNull
-    public abstract <T> LazyOptional<T> getCapabilityDirectional(@NotNull Capability<T> cap, @Nullable Direction side);
+    @SuppressWarnings("unused")
+    public <T> LazyOptional<T> getCapabilityDirectional(@NotNull Capability<T> cap, @Nullable Direction side) {
+        return LazyOptional.empty();
+    }
 
     @NotNull
     @Override
