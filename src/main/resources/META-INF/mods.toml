@@ -1,0 +1,31 @@
+modLoader="javafml"
+loaderVersion="[45,)"
+license="MIT"
+issueTrackerURL="https://github.com/Hantonik/AtomicCore/issues"
+
+[[mods]]
+    modId="atomiccore"
+    version="${version}"
+    displayName="${mod_name}"
+    displayURL="https://www.curseforge.com/minecraft/mc-mods/atomiccore"
+    logoFile="logo.png"
+    updateJSONURL="https://raw.githubusercontent.com/Hantonik/AtomicCore/1.19.4/update.json"
+    authors="Hantonik"
+    description='''The driving wheel for others from The Atomic Series!!
+
+Actually, it's just a library mod that can be used in other mods. Enjoy!
+'''
+
+[[dependencies.atomiccore]]
+    modId="forge"
+    mandatory=true
+    versionRange="[45,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.atomiccore]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.19.4]"
+    ordering="NONE"
+    side="BOTH"

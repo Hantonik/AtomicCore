@@ -1,0 +1,10 @@
+{
+    "pack": {
+        "description": {
+            "text": "AtomicCore resources"
+        },
+
+        "forge:server_data_pack_format": 12,
+        "pack_format": 13
+    }
+}
