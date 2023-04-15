@@ -22,3 +22,8 @@ However, there are also functionalities that are not required for other mods to 
 
 <em><span style="font-family: 'comic sans ms', sans-serif; color: #999999">"If you want to use my code, feel free, but remember to mention whose code it is!</span></em>
 <em><p style="padding-left: 5px;"><span style="font-family: 'comic sans ms', sans-serif; color: #999999">Take care, author."</span></p></em>
+
+## Support
+<a title="Thanks!" href="https://www.buymeacoffee.com/hantonik"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=hantonik&button_colour=BD5FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
+
+**I do it out of passion**, but if you want to appreciate my work, you can do it by [buying me a coffee](https://www.buymeacoffee.com/hantonik "Here!"), **thanks <3**!
