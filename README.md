@@ -9,8 +9,8 @@ However, there are also functionalities that are not required for other mods to 
 
 ## Downloads
 
-[CurseForge](https://curseforge.com/minecraft/mc-mods/atomiccore "Then just click download ;)")
-[Modrinth](https://modrinth.com/mod/atomiccore "Then just click download ;)")
+Download from [CurseForge](https://curseforge.com/minecraft/mc-mods/atomiccore "Then just click download ;)")\
+Download from [Modrinth](https://modrinth.com/mod/atomiccore "Then just click download ;)")
 
 ## Your contribution
 
