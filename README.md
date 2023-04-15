@@ -12,7 +12,7 @@ However, there are also functionalities that are not required for other mods to 
 Download from [CurseForge](https://curseforge.com/minecraft/mc-mods/atomiccore "Then just click download ;)")\
 Download from [Modrinth](https://modrinth.com/mod/atomiccore "Then just click download ;)")
 
-## Your contribution
+## Contribution
 
 **Found a bug?** Report it [here](https://github.com/Hantonik/AtomicCore/issues/new?labels=bug&amp;template=bug_report.md "Enter all the necessary information!"), and I'll try to fix it!\
 **Have an idea for a new feature?** Tell me more about it [here](https://github.com/Hantonik/AtomicCore/issues/new?labels=enhancement&amp;template=feature_request.md "I'm open to suggestions!")!
