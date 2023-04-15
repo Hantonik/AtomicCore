@@ -9,7 +9,8 @@ However, there are also functionalities that are not required for other mods to 
 
 ## Downloads
 
-[Minecraft 1.19.4](https://curseforge.com/minecraft/mc-mods/atomiccore/files/all?filter-game-version=2020709689:9776 "Then just click download ;)")
+[CurseForge](https://curseforge.com/minecraft/mc-mods/atomiccore "Then just click download ;)")
+[Modrinth](https://modrinth.com/mod/atomiccore "Then just click download ;)")
 
 ## Your contribution
 
