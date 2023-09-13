@@ -1,0 +1,9 @@
+accessWidener v2 named
+
+accessible method net/minecraft/world/item/crafting/RecipeManager byType (Lnet/minecraft/world/item/crafting/RecipeType;)Ljava/util/Map;
+
+accessible field net/minecraft/world/item/crafting/RecipeManager recipes Ljava/util/Map;
+accessible field net/minecraft/world/item/crafting/RecipeManager byName Ljava/util/Map;
+
+accessible field net/minecraft/client/resources/model/MultiPartBakedModel selectors Ljava/util/List;
+accessible field net/minecraft/client/resources/model/WeightedBakedModel wrapped Lnet/minecraft/client/resources/model/BakedModel;

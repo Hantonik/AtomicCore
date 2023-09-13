@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "atomiccore",
+  "version": "${mod_version}",
+
+  "name": "${mod_name}",
+  "description": "The driving wheel for others from The Atomic Series!!\n\nActually, it's just a library mod that can be used in other mods. Enjoy!",
+  "icon": "logo.png",
+  "license": "MIT",
+  "authors": [
+    "Hantonik"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/atomiccore",
+    "sources": "https://github.com/Hantonik/AtomicCore"
+  },
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "hantonik.atomic.core.AtomicCore"
+    ],
+    "client": [
+      "hantonik.atomic.core.AtomicCoreClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": ">=${fabric_version}",
+    "minecraft": "~${mc_version}",
+    "java": ">=17"
+  },
+
+  "mixins": [
+    "atomiccore.mixins.json"
+  ],
+  "accessWidener": "atomiccore.accesswidener"
+}

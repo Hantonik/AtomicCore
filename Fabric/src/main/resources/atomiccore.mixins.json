@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "hantonik.atomic.core.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "MixinReloadableServerResources"
+  ],
+  "client": [
+    "MixinClientPacketListener"
+  ],
+  "minVersion": "0.8"
+}

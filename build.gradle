@@ -1,141 +1,45 @@
-plugins {
-    id 'net.minecraftforge.gradle' version '5.1.+'
-    id 'io.freefair.lombok' version '6.5.+'
+apply from: 'buildtools/ColoredOutput.gradle'
 
-    id 'idea'
-    id 'maven-publish'
-}
+println "Starting build of $mod_name, Version: $mod_version"
 
-file('gradle.properties').withReader {
-    def prop = new Properties()
-    prop.load(it)
-    project.ext.config = new ConfigSlurper().parse prop
-}
+subprojects {
+    version = mod_version
+    group = "hantonik.$mod_id"
 
-version = mod_version
-group = "hantonik.$mod_id"
-archivesBaseName = "$mod_name-$mc_version"
+    def replaceProperties = [
+        'mod_version': version,
+		'mod_name': mod_name,
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+		'mc_version': mc_version,
 
-println "\nStarting build of $mod_name, Version: $version"
-println "Using Forge: $forge_version, for Minecraft: $mc_version, with Mappings: $mappings_version-$mappings_channel\n"
+		'loader_version': loader_version,
+		'fabric_version': fabric_version
+    ]
 
-minecraft {
-    mappings channel: mappings_channel, version: mappings_version
+    tasks.withType(ProcessResources).configureEach {
+        inputs.properties replaceProperties
+	    replaceProperties.put 'project', project
 
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+	    filesMatching(List.of("META-INF/mods.toml", "fabric.mod.json")) {
+	    	expand replaceProperties
+	    }
+    }
 
-    runs {
-        client {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', "$mod_id"
-
-            ideaModule "${rootProject.name}.main"
-
-            mods {
-                atomiccore {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', "$mod_id"
-
-            ideaModule "${rootProject.name}.main"
-
-            mods {
-                atomiccore {
-                    source sourceSets.main
-                }
-            }
+    tasks.withType(Jar).configureEach {
+        manifest {
+            attributes([
+                    "Specification-Title": mod_id,
+                    "Specification-Vendor": "Hantonik",
+                    "Specification-Version": "1",
+                    "Implementation-Title": project.name,
+                    "Implementation-Version": project.jar.archiveVersion,
+                    "Implementation-Vendor": "Hantonik",
+                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+            ])
         }
     }
-}
 
-dependencies {
-    minecraft "net.minecraftforge:forge:$mc_version-$forge_version"
-
-    compileOnly "org.projectlombok:lombok:$lombok_version"
-    annotationProcessor "org.projectlombok:lombok:$lombok_version"
-}
-
-task replaceResources(type: Copy) {
-    outputs.upToDateWhen { false }
-
-    from(sourceSets.main.resources.srcDirs) {
-        include "META-INF/mods.toml"
-        expand 'version': version, 'mod_name': mod_name
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
     }
-
-    into "$buildDir/resources/main/"
-}
-
-processResources {
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'META-INF/mods.toml'
-    }
-
-    finalizedBy replaceResources
-}
-
-jar {
-    manifest {
-        attributes([
-                "Specification-Title": archivesBaseName,
-                "Specification-Vendor": "Hantonik",
-                "Specification-Version": "1",
-                "Implementation-Title": project.name,
-                "Implementation-Version": version,
-                "Implementation-Vendor" :"Hantonik",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
-
-    finalizedBy('reobfJar')
-}
-
-task sourcesJar(type: Jar) {
-    classifier = "sources"
-    from sourceSets.main.allJava
-}
-
-task javadocJar(type: Jar) {
-    classifier = "javadoc"
-    from javadoc
-}
-
-artifacts {
-    archives jar
-    archives sourcesJar
-    archives javadocJar
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-            artifact sourcesJar
-            artifact javadocJar
-
-            artifactId archivesBaseName
-        }
-    }
-    repositories {
-        mavenLocal()
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
 }
