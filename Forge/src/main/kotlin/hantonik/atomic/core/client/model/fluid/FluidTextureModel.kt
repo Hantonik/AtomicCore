@@ -3,7 +3,7 @@ package hantonik.atomic.core.client.model.fluid
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonObject
 import com.google.gson.JsonSyntaxException
-import hantonik.atomic.core.util.helper.ModelHelper
+import hantonik.atomic.core.util.helper.ACModelHelper
 import net.minecraft.client.renderer.block.model.ItemOverrides
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite
 import net.minecraft.client.renderer.texture.TextureAtlasSprite
@@ -99,7 +99,7 @@ class FluidTextureModel(private val temperature: Int, private val density: Int, 
             return model.tintColor
         }
 
-        private fun getFluidModel(fluid: Fluid?): Baked? = ModelHelper.getBakedModel(fluid?.defaultFluidState()!!.createLegacyBlock(), Baked::class.java)
+        private fun getFluidModel(fluid: Fluid?): Baked? = ACModelHelper.getBakedModel(fluid?.defaultFluidState()!!.createLegacyBlock(), Baked::class.java)
 
         private fun getCachedModel(fluid: Fluid?): Baked? = this.modelCache.computeIfAbsent(fluid, this::getFluidModel)
 

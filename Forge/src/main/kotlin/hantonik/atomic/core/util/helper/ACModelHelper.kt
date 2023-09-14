@@ -10,7 +10,7 @@ import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.BlockState
 
-object ModelHelper {
+object ACModelHelper {
     private val TEXTURE_CACHE: MutableMap<Block, ResourceLocation> = mutableMapOf()
 
     val LISTENER = ResourceManagerReloadListener { TEXTURE_CACHE.clear() }
