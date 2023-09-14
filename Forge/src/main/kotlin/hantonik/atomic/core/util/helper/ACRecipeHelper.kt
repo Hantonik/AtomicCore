@@ -35,8 +35,6 @@ object ACRecipeHelper {
         if (MANAGER?.byName is ImmutableMap)
             MANAGER?.byName = Maps.newHashMap(MANAGER?.byName!!)
 
-        LevelRenderer
-
         return MANAGER
     }
 
