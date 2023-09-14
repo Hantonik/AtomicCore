@@ -2,6 +2,7 @@ package hantonik.atomic.core.util.helper
 
 import com.google.common.collect.ImmutableMap
 import com.google.common.collect.Maps
+import net.minecraft.client.renderer.LevelRenderer
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.Container
 import net.minecraft.world.item.crafting.Recipe
@@ -33,6 +34,8 @@ object ACRecipeHelper {
 
         if (MANAGER?.byName is ImmutableMap)
             MANAGER?.byName = Maps.newHashMap(MANAGER?.byName!!)
+
+        LevelRenderer
 
         return MANAGER
     }
