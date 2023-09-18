@@ -42,3 +42,4 @@ replay_*.log
 /Fabric/src/test/
 /Forge/run/
 /Fabric/run/
+/setup.bat
