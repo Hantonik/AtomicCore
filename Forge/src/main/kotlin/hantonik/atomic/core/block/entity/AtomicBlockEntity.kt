@@ -37,6 +37,8 @@ open class AtomicBlockEntity(type: BlockEntityType<out AtomicBlockEntity>, pos: 
     open fun markDirtyAndDispatch() {
         this.markDirty()
 
+        this.level ?: return
+
         for (player in this.level!!.players())
             if (player is ServerPlayer)
                 if (hypot(player.x - player.z, this.worldPosition.x + 0.5 - this.worldPosition.z + 0.5) < 64)

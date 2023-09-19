@@ -1,6 +1,5 @@
 package hantonik.atomic.core.storage
 
-import com.google.errorprone.annotations.CanIgnoreReturnValue
 import net.minecraft.util.Mth
 import net.minecraftforge.energy.EnergyStorage
 import kotlin.math.min
@@ -20,55 +19,47 @@ class AtomicEnergyStorage(capacity: Int, maxReceive: Int, maxExtract: Int, energ
 
     constructor(capacity: Int) : this(capacity, capacity, capacity, 0, null)
 
-    fun getMaxReceive() = this.maxReceive
+    var maxReceive: Int
+        get() = super.maxReceive
+        set(value) {
+            super.maxReceive = value
 
-    fun getMaxExtract() = this.maxExtract
+            if (this.onContentsChanged != null)
+                this.onContentsChanged!!.invoke()
+        }
 
-    @CanIgnoreReturnValue
-    fun setMaxReceive(maxReceive: Int): AtomicEnergyStorage {
-        this.maxReceive = maxReceive
+    var maxExtract: Int
+        get() = super.maxExtract
+        set(value) {
+            super.maxExtract = value
 
-        if (this.onContentsChanged != null)
-            this.onContentsChanged!!.invoke()
+            if (this.onContentsChanged != null)
+                this.onContentsChanged!!.invoke()
+        }
 
-        return this
-    }
+    var capacity: Int
+        get() = super.capacity
+        set(value) {
+            super.capacity = value
 
-    @CanIgnoreReturnValue
-    fun setMaxExtract(maxExtract: Int): AtomicEnergyStorage {
-        this.maxExtract = maxExtract
+            if (this.onContentsChanged != null)
+                this.onContentsChanged!!.invoke()
+        }
 
-        if (this.onContentsChanged != null)
-            this.onContentsChanged!!.invoke()
+    var energy: Int
+        get() = super.energy
+        set(value) {
+            super.energy = Mth.clamp(value, 0, super.capacity)
 
-        return this
-    }
-
-    @CanIgnoreReturnValue
-    fun setCapacity(capacity: Int): AtomicEnergyStorage {
-        this.capacity = capacity
-
-        if (this.onContentsChanged != null)
-            this.onContentsChanged!!.invoke()
-
-        return this
-    }
-
-    @CanIgnoreReturnValue
-    fun setEnergy(amount: Int): AtomicEnergyStorage {
-        this.energy = Mth.clamp(amount, 0, this.capacity)
-
-        if (this.onContentsChanged != null)
-            this.onContentsChanged!!.invoke()
-
-        return this
-    }
+            if (this.onContentsChanged != null)
+                this.onContentsChanged!!.invoke()
+        }
 
     override fun receiveEnergy(amount: Int, simulate: Boolean): Int {
-        val received = Mth.clamp(amount, 0, min(this.capacity - this.energy, this.maxReceive))
+        val received = Mth.clamp(amount, 0, min(super.capacity - super.energy, super.maxReceive))
 
         if (!simulate && received != 0) {
-            this.energy += received
+            super.energy += received
 
             if (this.onContentsChanged != null)
                 this.onContentsChanged!!.invoke()
@@ -78,10 +69,10 @@ class AtomicEnergyStorage(capacity: Int, maxReceive: Int, maxExtract: Int, energ
     }
 
     override fun extractEnergy(amount: Int, simulate: Boolean): Int {
-        val extracted = Mth.clamp(amount, 0, min(this.energy, this.maxExtract))
+        val extracted = Mth.clamp(amount, 0, min(super.energy, super.maxExtract))
 
         if (!simulate && extracted != 0) {
-            this.energy -= extracted
+            super.energy -= extracted
 
             if (this.onContentsChanged != null)
                 this.onContentsChanged!!.invoke()
@@ -90,11 +81,11 @@ class AtomicEnergyStorage(capacity: Int, maxReceive: Int, maxExtract: Int, energ
         return extracted
     }
 
-    fun receiveEnergyBypassLimit(amount: Int, simulate: Boolean): Int {
-        val received = Mth.clamp(amount, 0, this.capacity - this.energy)
+    fun receiveBypassLimit(amount: Int, simulate: Boolean): Int {
+        val received = Mth.clamp(amount, 0, super.capacity - super.energy)
 
         if (!simulate && received != 0) {
-            this.energy += received
+            super.energy += received
 
             if (this.onContentsChanged != null)
                 this.onContentsChanged!!.invoke()
@@ -103,11 +94,11 @@ class AtomicEnergyStorage(capacity: Int, maxReceive: Int, maxExtract: Int, energ
         return received
     }
 
-    fun extractEnergyBypassLimit(amount: Int, simulate: Boolean): Int {
-        val extracted = Mth.clamp(amount, 0, this.energy)
+    fun extractBypassLimit(amount: Int, simulate: Boolean): Int {
+        val extracted = Mth.clamp(amount, 0, super.energy)
 
         if (!simulate && extracted != 0) {
-            this.energy -= extracted
+            super.energy -= extracted
 
             if (this.onContentsChanged != null)
                 this.onContentsChanged!!.invoke()

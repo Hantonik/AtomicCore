@@ -73,9 +73,9 @@ open class FluidBuilder(private val properties: Properties, private val location
             .bucket(this.bucket)
     }
 
-    open fun getFluidType(fluid: () -> Fluid, descriptionId: String): () -> FluidType = { ModelFluidType({ this.properties.descriptionId(descriptionId) }, fluid) }
+    open fun getFluidType(fluid: () -> Fluid, descriptionId: String): () -> ModelFluidType = { ModelFluidType({ this.properties.descriptionId(descriptionId) }, fluid) }
 
-    fun getStillFluidType(fluid: () -> Fluid): () -> FluidType = this.getFluidType(fluid, "fluid.${this.location.namespace}.${this.location.path}")
+    fun getStillFluidType(fluid: () -> Fluid): () -> ModelFluidType = this.getFluidType(fluid, "fluid.${this.location.namespace}.${this.location.path}")
 
-    fun getFlowingFluidType(fluid: () -> Fluid): () -> FluidType = this.getFluidType(fluid, "fluid.${this.location.namespace}.flowing_${this.location.path}")
+    fun getFlowingFluidType(fluid: () -> Fluid): () -> ModelFluidType = this.getFluidType(fluid, "fluid.${this.location.namespace}.flowing_${this.location.path}")
 }

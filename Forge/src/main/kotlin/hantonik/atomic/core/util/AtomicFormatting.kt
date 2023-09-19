@@ -1,5 +1,7 @@
 package hantonik.atomic.core.util
 
+import java.text.DecimalFormat
+
 object AtomicFormatting {
     fun formatTime(time: Long): String {
         val formattedTime = StringBuilder()
@@ -22,5 +24,21 @@ object AtomicFormatting {
             formattedTime.append(ticks).append("t ")
 
         return formattedTime.trim().toString()
+    }
+
+    fun format(input: Long): String {
+        val pattern = DecimalFormat("#.##")
+        val suffixes = arrayOf(" ", " k", " M", " G", " T")
+
+        var output = input
+
+        for (suffix in suffixes) {
+            if (output >= 1000)
+                output /= 1000
+            else
+                return pattern.format(output) + suffix
+        }
+
+        return pattern.format(output) + suffixes[suffixes.size - 1]
     }
 }

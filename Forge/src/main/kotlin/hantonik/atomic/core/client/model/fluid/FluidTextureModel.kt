@@ -1,5 +1,6 @@
 package hantonik.atomic.core.client.model.fluid
 
+import com.google.common.collect.Maps
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonObject
 import com.google.gson.JsonSyntaxException
@@ -17,7 +18,7 @@ import net.minecraftforge.client.model.geometry.IGeometryLoader
 import net.minecraftforge.client.model.geometry.IUnbakedGeometry
 import java.util.function.Function
 
-class FluidTextureModel(private val temperature: Int, private val density: Int, private val viscosity: Int, private val lightLevel: Int, private val tintColor: Int) : IUnbakedGeometry<FluidTextureModel> {
+class FluidTextureModel(private val lightLevel: Int, private val tintColor: Int) : IUnbakedGeometry<FluidTextureModel> {
     companion object {
         val LOADER = Loader()
 
@@ -27,13 +28,13 @@ class FluidTextureModel(private val temperature: Int, private val density: Int, 
     override fun bake(context: IGeometryBakingContext, baker: ModelBaker, spriteGetter: Function<Material, TextureAtlasSprite>, modelState: ModelState, overrides: ItemOverrides, modelLocation: ResourceLocation): BakedModel {
         val overlay = context.getMaterial("overlay")
 
-        return Baked(SimpleBakedModel.Builder(context.useAmbientOcclusion(), context.useBlockLight(), context.isGui3d, context.transforms, overrides).particle(spriteGetter.apply(overlay)).build(), context.getMaterial("still").texture(), context.getMaterial("flowing").texture(), if (isMissing(overlay)) null else overlay.texture(), this.temperature, this.density, this.viscosity, this.lightLevel, this.tintColor)
+        return Baked(SimpleBakedModel.Builder(context.useAmbientOcclusion(), context.useBlockLight(), context.isGui3d, context.transforms, overrides).particle(spriteGetter.apply(overlay)).build(), context.getMaterial("still").texture(), context.getMaterial("flowing").texture(), if (isMissing(overlay)) null else overlay.texture(), this.lightLevel, this.tintColor)
     }
 
-    internal class Baked(model: BakedModel, val still: ResourceLocation, val flowing: ResourceLocation, val overlay: ResourceLocation?, val temperature: Int, val density: Int, val viscosity: Int, val lightLevel: Int, val tintColor: Int) : BakedModelWrapper<BakedModel>(model)
+    internal class Baked(model: BakedModel, val still: ResourceLocation, val flowing: ResourceLocation, val overlay: ResourceLocation?, val lightLevel: Int, val tintColor: Int) : BakedModelWrapper<BakedModel>(model)
 
     class Loader : IGeometryLoader<FluidTextureModel>, ModelFluidType.IFluidModelProvider {
-        private val modelCache: MutableMap<Fluid?, Baked?> = mutableMapOf()
+        private val modelCache: MutableMap<Fluid?, Baked?> = Maps.newConcurrentMap()
 
         override fun getStillTexture(fluid: Fluid?): ResourceLocation {
             val model = this.getCachedModel(fluid)
@@ -59,30 +60,6 @@ class FluidTextureModel(private val temperature: Int, private val density: Int, 
             return model.overlay
         }
 
-        override fun getTemperature(fluid: Fluid?): Int {
-            val model = this.getCachedModel(fluid)
-
-            model ?: return super.getTemperature(fluid)
-
-            return model.temperature
-        }
-
-        override fun getDensity(fluid: Fluid?): Int {
-            val model = this.getCachedModel(fluid)
-
-            model ?: return super.getDensity(fluid)
-
-            return model.density
-        }
-
-        override fun getViscosity(fluid: Fluid?): Int {
-            val model = this.getCachedModel(fluid)
-
-            model ?: return super.getViscosity(fluid)
-
-            return model.viscosity
-        }
-
         override fun getLightLevel(fluid: Fluid?): Int {
             val model = this.getCachedModel(fluid)
 
@@ -104,11 +81,8 @@ class FluidTextureModel(private val temperature: Int, private val density: Int, 
         private fun getCachedModel(fluid: Fluid?): Baked? = this.modelCache.computeIfAbsent(fluid, this::getFluidModel)
 
         override fun read(json: JsonObject, context: JsonDeserializationContext): FluidTextureModel {
-            val temperature = GsonHelper.getAsInt(json, "temperature", super.getTemperature(null))
-            val density = GsonHelper.getAsInt(json, "density", super.getDensity(null))
-            val viscosity = GsonHelper.getAsInt(json, "viscosity", super.getViscosity(null))
             val lightLevel = GsonHelper.getAsInt(json, "lightLevel", super.getLightLevel(null))
-            var color = super.getTintColor(null)
+            var color = super.getTintColor(null).toLong()
 
             if (json.has("color")) {
                 val colorString = GsonHelper.getAsString(json, "color")
@@ -117,16 +91,16 @@ class FluidTextureModel(private val temperature: Int, private val density: Int, 
                     throw JsonSyntaxException("Invalid color '$colorString'")
 
                 try {
-                    color = colorString.toLong().toInt()
+                    color = colorString.toLong(16)
 
                     if (colorString.length == 6)
-                        color = color.or(0xFF000000.toInt())
+                        color = color.or(0xFF000000)
                 } catch (e: NumberFormatException) {
                     throw JsonSyntaxException("Invalid color '$colorString'")
                 }
             }
 
-            return FluidTextureModel(temperature, density, viscosity, lightLevel, color)
+            return FluidTextureModel(lightLevel, color.toInt())
         }
     }
 }

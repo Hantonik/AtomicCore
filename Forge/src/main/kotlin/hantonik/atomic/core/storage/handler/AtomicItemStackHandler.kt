@@ -13,6 +13,9 @@ open class AtomicItemStackHandler(size: Int, private val onContentsChanged: ((In
 
     var outputsSlots: IntArray? = null
 
+    val stacks: NonNullList<ItemStack>
+        get() = super.stacks
+
     constructor(size: Int) : this(size, null)
 
     override fun insertItem(slot: Int, stack: ItemStack, simulate: Boolean): ItemStack {
@@ -46,8 +49,6 @@ open class AtomicItemStackHandler(size: Int, private val onContentsChanged: ((In
     fun insertItemSuper(slot: Int, stack: ItemStack, simulate: Boolean) = super.insertItem(slot, stack, simulate)
 
     fun extractItemSuper(slot: Int, amount: Int, simulate: Boolean) = super.extractItem(slot, amount, simulate)
-
-    fun getStacks(): NonNullList<ItemStack> = this.stacks
 
     fun setDefaultSlotLimit(size: Int) {
         this.maxStackSize = size

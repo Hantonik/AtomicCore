@@ -67,6 +67,8 @@ abstract class AtomicRecipeBuilder<T : AtomicRecipeBuilder<T>>(protected val ser
             return json
         }
 
+        override fun getId() = this.id
+
         override fun getAdvancementId() = this.advancementId
 
         override fun getType() = ForgeRegistries.RECIPE_SERIALIZERS.getValue(serializerName)!!
