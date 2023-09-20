@@ -19,7 +19,7 @@ class ModelFluidType(properties: (Properties) -> Properties, private val fluid: 
 
             override fun getFlowingTexture() = PROVIDER.getFlowingTexture(fluid.invoke())
 
-//        override fun getOverlayTexture() = PROVIDER.getOverlayTexture(fluid.invoke())
+            override fun getOverlayTexture() = PROVIDER.getOverlayTexture(fluid.invoke())
 
             override fun getTintColor() = PROVIDER.getTintColor(fluid.invoke())
         })
