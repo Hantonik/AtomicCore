@@ -8,17 +8,18 @@ import hantonik.atomic.core.registration.`object`.FluidObject
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
-import net.minecraft.world.item.BucketItem
-import net.minecraft.world.item.Item
+import net.minecraft.world.item.*
 import net.minecraft.world.item.Item.Properties
-import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.BlockGetter
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.LiquidBlock
+import net.minecraft.world.level.block.SoundType
 import net.minecraft.world.level.material.FlowingFluid
 import net.minecraft.world.level.material.Fluid
+import net.minecraft.world.level.material.PushReaction
+import net.minecraftforge.client.event.RegisterColorHandlersEvent
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions
 import net.minecraftforge.eventbus.api.IEventBus
 import net.minecraftforge.fluids.FluidType
 import net.minecraftforge.fluids.ForgeFlowingFluid
@@ -36,6 +37,14 @@ class FluidDeferredRegister(registry: IForgeRegistry<Fluid>, modId: String, priv
         this.fluidTypeRegistry.register(bus)
         this.blockRegistry.register(bus)
         this.itemRegistry.register(bus)
+
+        bus.addListener(this::onRegisterItemColorHandlers)
+    }
+
+    private fun onRegisterItemColorHandlers(event: RegisterColorHandlersEvent.Item) {
+        this.itemRegistry.entries.map(RegistryObject<Item>::get).forEach {
+            event.register({ stack, index -> if (index == 1) IClientFluidTypeExtensions.of((stack.item as BucketItem).fluid).tintColor else -0x1 }, it)
+        }
     }
 
     fun <I : Fluid> registerFluid(name: String, fluid: () -> I): RegistryObject<I> = this.register.register(name, fluid)
@@ -45,6 +54,8 @@ class FluidDeferredRegister(registry: IForgeRegistry<Fluid>, modId: String, priv
         val flowingDelayed = DelayedSupplier<F>()
 
         val blockObj: () -> LiquidBlock = this.blockRegistry.register("${name}_fluid") { block.invoke(stillDelayed) }::get
+
+        val test = DelayedSupplier<FluidObject<F>>()
 
         builder.bucket(this.itemRegistry.register("${name}_bucket") {
             object : BucketItem(stillDelayed, bucketProperties) {
@@ -58,23 +69,23 @@ class FluidDeferredRegister(registry: IForgeRegistry<Fluid>, modId: String, priv
         }::get)
 
         val stillProps = builder.block(blockObj).build(builder.getStillFluidType(stillDelayed), stillDelayed, flowingDelayed)
-        val stillSupplier: () -> F = this.registerFluid(name) { still.invoke(stillProps) }::get
-        stillDelayed.supplier = stillSupplier
-        this.fluidTypeRegistry.register(name, builder.getStillFluidType(stillSupplier))
+        stillDelayed.supplier = this.registerFluid(name) { still.invoke(stillProps) }::get
+        this.fluidTypeRegistry.register(name, builder.getStillFluidType(stillDelayed))
 
         val flowingProps = builder.block(blockObj).build(builder.getFlowingFluidType(flowingDelayed), stillDelayed, flowingDelayed)
-        val flowingSupplier: () -> F = this.registerFluid("flowing_$name") { flowing.invoke(flowingProps) }::get
-        flowingDelayed.supplier = flowingSupplier
-        this.fluidTypeRegistry.register("flowing_$name", builder.getFlowingFluidType(flowingSupplier))
+        flowingDelayed.supplier = this.registerFluid("flowing_$name") { flowing.invoke(flowingProps) }::get
+        this.fluidTypeRegistry.register("flowing_$name", builder.getFlowingFluidType(flowingDelayed))
 
-        return FluidObject(this.resource(name), tagName, stillSupplier, flowingSupplier, blockObj)
+        test.supplier = { FluidObject(this.resource(name), tagName, stillDelayed, flowingDelayed, blockObj) }
+
+        return test.invoke()
     }
 
     fun <F : ForgeFlowingFluid> register(name: String, builder: FluidBuilder, still: (ForgeFlowingFluid.Properties) -> F, flowing: (ForgeFlowingFluid.Properties) -> F, block: (() -> FlowingFluid) -> LiquidBlock, bucketProperties: Properties, showTemperature: Boolean) = this.register(name, name, builder, still, flowing, block, bucketProperties, showTemperature)
 
     fun <F : ForgeFlowingFluid> register(name: String, tagName: String, properties: FluidType.Properties, still: (ForgeFlowingFluid.Properties) -> F, flowing: (ForgeFlowingFluid.Properties) -> F, lightLevel: Int, bucketProperties: Properties, showTemperature: Boolean): FluidObject<F> {
         return this.register(name, tagName, FluidBuilder(properties, ResourceLocation(this.modId, name)).explosionResistance(100.0F), still, flowing, {
-            object : LiquidBlock(it, Properties.of().air().strength(100.0F).noLootTable().lightLevel { lightLevel }) {
+            object : LiquidBlock(it, Properties.of().replaceable().noCollission().strength(100.0F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY).lightLevel { lightLevel }) {
                 override fun appendHoverText(stack: ItemStack, level: BlockGetter?, components: MutableList<Component>, flag: TooltipFlag) {
                     super.appendHoverText(stack, level, components, flag)
 
@@ -101,7 +112,7 @@ class FluidDeferredRegister(registry: IForgeRegistry<Fluid>, modId: String, priv
 
     fun <F : ForgeFlowingFluid> register(name: String, tagName: String, properties: FluidType.Properties, still: (ForgeFlowingFluid.Properties) -> F, flowing: (ForgeFlowingFluid.Properties) -> F, lightLevel: Int, bucketProperties: Properties): FluidObject<F> {
         return this.register(name, tagName, FluidBuilder(properties, ResourceLocation(this.modId, name)).explosionResistance(100.0F), still, flowing, {
-            object : LiquidBlock(it, Properties.of().air().strength(100.0F).noLootTable().lightLevel { lightLevel }) {
+            object : LiquidBlock(it, Properties.of().replaceable().noCollission().strength(100.0F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY).lightLevel { lightLevel }) {
                 override fun getDescriptionId() = "block.$modId.${name}_fluid"
             }
         }, bucketProperties, false)

@@ -41,12 +41,13 @@ class AtomicCore {
     }
 
     @SubscribeEvent
-    fun registerClientReloadListeners(event: RegisterClientReloadListenersEvent) {
-        event.registerReloadListener(ACModelHelper.LISTENER)
+    fun registerGeometryLoaders(event: ModelEvent.RegisterGeometryLoaders) {
+        event.register("fluid_texture", FluidTextureModel.LOADER)
     }
 
     @SubscribeEvent
-    fun registerGeometryLoaders(event: ModelEvent.RegisterGeometryLoaders) {
-        event.register("fluid_texture", FluidTextureModel.LOADER)
+    fun registerClientReloadListeners(event: RegisterClientReloadListenersEvent) {
+        event.registerReloadListener(ACModelHelper.LISTENER)
+        event.registerReloadListener(FluidTextureModel.LOADER)
     }
 }

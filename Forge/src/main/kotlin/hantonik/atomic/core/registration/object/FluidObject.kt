@@ -11,7 +11,7 @@ import net.minecraftforge.fluids.ForgeFlowingFluid
 
 open class FluidObject<F : ForgeFlowingFluid>(val id: ResourceLocation, tagName: String, private val still: () -> F?, private val flowing: () -> F?, val block: (() -> LiquidBlock)?) : () -> F, ItemLike {
     val localTag: TagKey<Fluid> = FluidTags.create(this.id)
-    val forgeTag: TagKey<Fluid> = FluidTags.create(ResourceLocation("forge", this.id.path))
+    val forgeTag: TagKey<Fluid> = FluidTags.create(ResourceLocation("forge", tagName))
 
     fun getStill(): F {
         this.still.invoke() ?: throw NullPointerException("Fluid object missing still fluid")

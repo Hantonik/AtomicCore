@@ -10,6 +10,8 @@ import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite
 import net.minecraft.client.renderer.texture.TextureAtlasSprite
 import net.minecraft.client.resources.model.*
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.server.packs.resources.ResourceManager
+import net.minecraft.server.packs.resources.ResourceManagerReloadListener
 import net.minecraft.util.GsonHelper
 import net.minecraft.world.level.material.Fluid
 import net.minecraftforge.client.model.BakedModelWrapper
@@ -33,7 +35,7 @@ class FluidTextureModel(private val lightLevel: Int, private val tintColor: Int)
 
     internal class Baked(model: BakedModel, val still: ResourceLocation, val flowing: ResourceLocation, val overlay: ResourceLocation?, val lightLevel: Int, val tintColor: Int) : BakedModelWrapper<BakedModel>(model)
 
-    class Loader : IGeometryLoader<FluidTextureModel>, ModelFluidType.IFluidModelProvider {
+    class Loader : IGeometryLoader<FluidTextureModel>, ResourceManagerReloadListener, ModelFluidType.IFluidModelProvider {
         private val modelCache: MutableMap<Fluid?, Baked?> = Maps.newConcurrentMap()
 
         override fun getStillTexture(fluid: Fluid?): ResourceLocation {
@@ -79,6 +81,10 @@ class FluidTextureModel(private val lightLevel: Int, private val tintColor: Int)
         private fun getFluidModel(fluid: Fluid?): Baked? = ACModelHelper.getBakedModel(fluid?.defaultFluidState()!!.createLegacyBlock(), Baked::class.java)
 
         private fun getCachedModel(fluid: Fluid?): Baked? = this.modelCache.computeIfAbsent(fluid, this::getFluidModel)
+
+        override fun onResourceManagerReload(manager: ResourceManager) {
+            this.modelCache.clear()
+        }
 
         override fun read(json: JsonObject, context: JsonDeserializationContext): FluidTextureModel {
             val lightLevel = GsonHelper.getAsInt(json, "lightLevel", super.getLightLevel(null))
